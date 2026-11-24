@@ -1,0 +1,142 @@
+/* Besökarnas sidor: workshopsidan, bokning, granskning och bekräftelse. */
+
+/* ---------- Workshopsidan ---------- */
+.workshop { display: grid; gap: var(--space-40); align-items: start; }
+@media (max-width: 959px) { .sida.workshop { padding-top: 0; } }
+.workshop__innehall { display: grid; gap: 0; min-width: 0; }
+.workshop__innehall > .workshop-card { padding-bottom: 28px; }
+.workshop__avsnitt { display: grid; gap: var(--space-12); padding-block: 28px; }
+.workshop .viktig-info { margin-top: var(--space-12); }
+
+.viktig-info { display: grid; gap: var(--space-12); padding: var(--space-24) 20px; border-color: var(--border-strong); }
+.viktig-info__lista { margin: 0; }
+.viktig-info__lista dt { display: inline; font-weight: 500; }
+.viktig-info__lista dd { display: inline; margin: 0; }
+
+/* Prisrad: flytande kort i nederkant på mobil (16 px från kanterna, delvis genomskinligt),
+   bokningskort till höger som följer med vid scroll på dator. */
+.prisrad {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-16);
+  padding: var(--space-16) var(--space-16) var(--space-16) 20px;
+  border: 1px solid var(--border-default); border-radius: 16px;
+  background: rgb(255 255 255 / 0.8);
+  -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-floating);
+}
+.prisrad__pris { display: grid; gap: 2px; }
+.prisrad__belopp { font-size: 1.125rem; font-weight: 500; line-height: 1.3; }
+.prisrad__knapp { min-width: 120px; }
+
+@media (max-width: 959px) {
+  .prisrad {
+    position: fixed; z-index: 10;
+    left: var(--space-16); right: var(--space-16);
+    bottom: calc(var(--space-16) + env(safe-area-inset-bottom));
+  }
+}
+@media (min-width: 960px) {
+  .workshop { grid-template-columns: minmax(0, 1fr) 400px; gap: var(--space-48, 48px); }
+  .prisrad {
+    position: sticky; top: 104px;
+    padding: 28px; background: var(--surface-card);
+    border-radius: var(--radius-md); box-shadow: none;
+    -webkit-backdrop-filter: none; backdrop-filter: none;
+  }
+}
+
+/* ---------- Bokning, steg 1 ---------- */
+.boka { display: flex; flex-direction: column; gap: var(--space-32); }
+.boka__underrubrik { font-size: var(--text-h3); font-weight: 500; line-height: 1.3; }
+.boka__uppgifter { display: grid; gap: var(--space-16); }
+.boka__falt { display: grid; gap: var(--space-16); }
+.boka__datum, .boka__tid { display: grid; gap: var(--space-12); }
+.boka__datum > div:focus { outline: none; }
+.boka__handling { display: grid; gap: var(--space-12); text-align: center; }
+
+/* Dator: rubriken över båda kolumnerna. Vänster: datum och tid. Höger: "Dina uppgifter" som
+   etikett ovanför ett kort med fälten och Fortsätt. Etiketterna och korten börjar på samma linje. */
+@media (min-width: 960px) {
+  .boka {
+    display: grid; column-gap: 48px; row-gap: 0;
+    grid-template-columns: minmax(0, 1fr) 440px;
+    grid-template-rows: auto auto auto auto 1fr auto;
+  }
+  .boka__rubrik { grid-column: 1 / -1; grid-row: 1; margin-bottom: var(--space-32); }
+  .boka__uppgifter { display: contents; }
+  .boka__uppgifter > .boka__underrubrik { grid-column: 2; grid-row: 2; margin-bottom: var(--space-12); }
+  .boka__datum { grid-column: 1; grid-row: 2 / 6; align-self: start; }
+  .boka__tid { grid-column: 1; grid-row: 6; margin-top: var(--space-32); }
+  .boka__falt, .boka__handling {
+    grid-column: 2; background: var(--surface-card);
+    border: 1px solid var(--border-default); padding-inline: 28px;
+  }
+  .boka__falt { grid-row: 3; border-bottom: 0; border-radius: var(--radius-md) var(--radius-md) 0 0; padding-top: 28px; }
+  .boka__handling {
+    grid-row: 4; border-top: 0; border-radius: 0 0 var(--radius-md) var(--radius-md);
+    padding-top: var(--space-24); padding-bottom: 28px; align-self: start;
+  }
+}
+
+/* Fält: etikett ovanför, 48 px inmatning. 16 px text så att iOS inte zoomar. */
+.falt { display: grid; gap: var(--space-8); }
+.falt input {
+  height: 48px; width: 100%; padding: 0 var(--space-16);
+  border: 1px solid var(--border-strong); border-radius: var(--radius-sm);
+  background: var(--surface-card); font-size: 1rem;
+}
+.falt input::placeholder { color: var(--text-secondary); }
+.falt input:focus { outline: none; border: 2px solid var(--border-focus); padding-inline: 15px; }
+.falt input[aria-invalid='true'] { border-color: #b3261e; }
+.falt__fel { color: #b3261e; font-size: var(--text-caption); }
+
+/* Kalender */
+.kalender { padding: var(--space-16); }
+.kalender__manad { display: flex; align-items: center; justify-content: space-between; padding-bottom: var(--space-8); }
+.kalender__manad .icon-button:disabled { color: var(--text-disabled); cursor: default; background: none; }
+.kalender__manadsnamn { font-weight: 500; }
+.kalender__tabell { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.kalender__tabell th { height: 28px; font-weight: 500; }
+.kalender__tabell td { height: 44px; padding: 0; text-align: center; }
+.kalender__dag {
+  display: inline-grid; place-items: center; width: 40px; height: 40px;
+  border-radius: var(--radius-full); border: 0; font-size: 1rem;
+}
+.kalender__dag--inaktiv { color: var(--text-disabled); font-size: var(--text-caption); }
+.kalender__dag--ledig { background: var(--surface-brand-soft); font-weight: 500; cursor: pointer; }
+.kalender__dag--ledig:hover { box-shadow: inset 0 0 0 2px var(--aubergine); }
+.kalender__dag--vald { background: var(--action-selected); color: var(--text-on-action); font-weight: 500; cursor: pointer; }
+@media (max-width: 359px) { .kalender__dag { width: 34px; height: 34px; } }
+
+/* Tidval */
+.tider { display: flex; flex-wrap: wrap; gap: var(--space-8); }
+.tidval {
+  height: 44px; padding: 0 var(--space-16); border-radius: var(--radius-sm);
+  border: 1px solid var(--border-strong); background: var(--surface-card);
+  font-weight: 500; cursor: pointer;
+}
+.tidval[aria-pressed='true'] { background: var(--action-selected); border-color: var(--action-selected); color: var(--text-on-action); }
+
+/* ---------- Granska ---------- */
+.granska { display: grid; gap: var(--space-24); }
+.granska__kort { display: grid; gap: var(--space-16); padding: var(--space-24) 20px; }
+.granska__grupp { display: grid; gap: var(--space-12); }
+.granska__grupp--tat { gap: var(--space-8); }
+.granska__grupprubrik { display: flex; align-items: center; justify-content: space-between; gap: var(--space-8); }
+.granska__epost { overflow-wrap: anywhere; }
+.granska__pris { display: grid; gap: var(--space-4); }
+.granska__handling { display: grid; gap: var(--space-12); padding-top: var(--space-8); text-align: center; }
+.prisrad-rad { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-8); }
+.belopp { font-size: 1.125rem; font-weight: 500; line-height: 1.3; white-space: nowrap; }
+
+/* ---------- Bekräftelse ---------- */
+.bekraftelse { display: grid; gap: var(--space-24); }
+.bekraftelse__kvitto { display: grid; justify-items: center; gap: var(--space-12); padding-top: var(--space-16); text-align: center; }
+.bekraftelse__kvitto h1:focus { outline: none; }
+.bekraftelse__ikon {
+  display: grid; place-items: center; width: 88px; height: 88px;
+  border-radius: var(--radius-full); background: var(--surface-brand-soft); color: var(--aubergine);
+}
+.bekraftelse__nr { color: var(--text-secondary); font-weight: 500; }
+.bekraftelse__epost { color: var(--text-secondary); overflow-wrap: anywhere; }
+.bekraftelse__detaljer { display: grid; gap: var(--space-12); padding-block: var(--space-8); }
+.bekraftelse__tillbaka { text-align: center; }

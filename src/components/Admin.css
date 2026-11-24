@@ -1,0 +1,206 @@
+/* Arrangörens adminsida. Desktop: ramarna A1–A4 (alternativ B). Mobil: ramarna M1–M4. */
+
+.adm { min-height: 100dvh; display: flex; background: var(--surface-subtle); }
+
+/* ---------- Sidomeny 264 px ---------- */
+.adm-sidomeny {
+  width: 264px; flex: none;
+  position: sticky; top: 0; height: 100dvh;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: var(--space-24) var(--space-16);
+  background: var(--surface-card); border-right: 1px solid var(--border-default);
+}
+.adm-sidomeny__topp { display: grid; gap: var(--space-32); }
+.adm-logo { display: flex; align-items: center; justify-content: space-between; height: 40px; padding-left: var(--space-12); }
+.adm-logo__text, .adm-topp__logo {
+  font-size: 1.25rem; font-weight: 500; line-height: 1.3; letter-spacing: 0.08em;
+  color: var(--text-primary); text-decoration: none;
+}
+.adm-sidomeny__stang { display: none; }
+.adm-meny { display: grid; gap: var(--space-4); }
+.adm-meny__val {
+  display: flex; align-items: center; gap: var(--space-12); height: 44px; padding: 0 var(--space-12);
+  border-radius: var(--radius-sm); color: var(--text-secondary); text-decoration: none;
+}
+.adm-meny__val[aria-disabled='true'] { cursor: default; }
+.adm-meny__val--aktiv { background: var(--bg-page); color: var(--text-primary); font-weight: 500; }
+.adm-meny__val--aktiv svg { color: var(--icon-brand); }
+
+/* ---------- Toppfält 72 px ---------- */
+.adm-huvudyta { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.adm-topp {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-16);
+  height: 72px; padding: 0 var(--space-40);
+  background: var(--surface-card); border-bottom: 1px solid var(--border-default);
+}
+.adm-topp__logo { display: none; }
+.adm-topp__sok { width: 360px; }
+.adm-topp__hoger { display: flex; align-items: center; gap: var(--space-8); }
+.adm-topp__ikon { color: var(--text-primary); }
+.adm-topp__avdelare { width: 1px; height: 32px; margin-inline: 0 var(--space-8); background: var(--border-default); }
+.adm-topp__meny { display: none; }
+.adm-anvandare { display: flex; align-items: center; gap: var(--space-12); }
+.adm-anvandare img { width: 40px; height: 40px; border-radius: var(--radius-full); }
+.adm-anvandare__namn { display: grid; font-weight: 500; line-height: 1.5; }
+.adm-anvandare__namn .caption { font-weight: 400; }
+.adm-anvandare__pil { color: var(--text-secondary); }
+
+.icon-button[aria-disabled='true'], .button[aria-disabled='true'] { cursor: default; }
+.button[aria-disabled='true'] { background: var(--action-primary); color: var(--text-on-action); }
+
+/* ---------- Innehåll ---------- */
+.adm-innehall { flex: 1; }
+.adm-sida { display: grid; gap: var(--space-24); padding: var(--space-32) var(--space-40) var(--space-40); max-width: 1320px; }
+.adm-sidhuvud { display: grid; gap: var(--space-12); }
+.adm-sidhuvud--rad { display: flex; align-items: center; justify-content: space-between; gap: var(--space-16); flex-wrap: wrap; }
+.adm-sidhuvud__titel { display: grid; gap: var(--space-4); }
+.adm-sidhuvud__rubrikrad { display: flex; align-items: center; justify-content: space-between; gap: var(--space-16); flex-wrap: wrap; }
+.adm-underrubrik { color: var(--text-secondary); }
+
+.adm-tillbaka {
+  display: inline-flex; align-items: center; gap: var(--space-8); width: fit-content;
+  color: var(--text-link); font-weight: 500; text-decoration: none;
+}
+.adm-tillbaka:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+
+.adm-manad { display: flex; align-items: center; gap: var(--space-4); }
+.adm-manad p { min-width: 9.5em; text-align: center; font-size: var(--text-h3); font-weight: 500; }
+.adm-manad .icon-button:disabled { color: var(--text-disabled); cursor: default; background: none; }
+
+.adm-meta { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-8) var(--space-24); color: var(--text-secondary); }
+.adm-meta li { display: flex; align-items: center; gap: var(--space-8); }
+.adm-meta svg { color: var(--icon-brand); flex: none; }
+
+.adm-verktyg { display: flex; align-items: center; justify-content: space-between; gap: var(--space-16); flex-wrap: wrap; }
+.adm-sektionsrubrik { font-size: var(--text-h3); font-weight: 500; padding-top: var(--space-8); }
+.adm-verktyg__sok { width: 360px; }
+.adm-filter { display: flex; gap: var(--space-12); flex-wrap: wrap; }
+.adm-filter .search-field { width: 232px; }
+
+/* Flikväljare: Tillfällen | Alla deltagare */
+.flikvaljare {
+  display: inline-flex; gap: 2px; padding: 3px;
+  background: var(--surface-card); border: 1px solid var(--border-strong); border-radius: var(--radius-sm);
+}
+.flikvaljare a {
+  padding: 8px 12px; border-radius: 6px; color: var(--text-primary); text-decoration: none; line-height: 1.5;
+}
+.flikvaljare a[data-vald='true'] { background: var(--action-selected); color: var(--text-on-action); font-weight: 500; }
+
+/* Rullgardin */
+.adm-select { position: relative; }
+.adm-select select {
+  appearance: none; height: 44px; padding: 0 40px 0 var(--space-12);
+  border: 1px solid var(--border-strong); border-radius: var(--radius-sm); background: var(--surface-card);
+  font-size: 1rem; cursor: pointer;
+}
+.adm-select svg { position: absolute; right: 12px; top: 12px; pointer-events: none; color: var(--text-secondary); }
+
+.adm-tomt { padding: var(--space-32); text-align: center; color: var(--text-secondary); background: var(--surface-card); border: 1px dashed var(--border-strong); border-radius: var(--radius-md); }
+
+/* ---------- Tabeller ---------- */
+.adm-tabell-ram { background: var(--surface-card); border: 1px solid var(--border-default); border-radius: var(--radius-md); overflow: hidden; }
+.adm-tabell { width: 100%; border-collapse: collapse; }
+.adm-tabell th {
+  height: 48px; padding: 0 var(--space-16); text-align: left; white-space: nowrap;
+  background: var(--surface-subtle); border-bottom: 1px solid var(--border-default);
+  color: var(--text-secondary); font-size: var(--text-caption); font-weight: 500; letter-spacing: 0.02em;
+}
+.adm-tabell td { height: 72px; padding: var(--space-8) var(--space-16); vertical-align: middle; }
+.adm-tabell tbody tr + tr td { border-top: 1px solid var(--border-default); }
+.adm-tabell th:first-child, .adm-tabell td:first-child { padding-left: var(--space-24); }
+.adm-tabell th:last-child, .adm-tabell td:last-child { padding-right: var(--space-24); }
+.adm-tabell td > .caption, .adm-tabell td > .adm-stark { display: block; }
+.adm-stark { font-weight: 500; }
+.adm-cell--epost { overflow-wrap: anywhere; }
+.adm-cell--atgarder { text-align: right; white-space: nowrap; }
+.adm-cell--atgarder > * { vertical-align: middle; }
+.adm-cell--atgarder .text-link { margin-right: var(--space-8); }
+.adm-cell--atgarder .icon-button { color: var(--text-primary); }
+.adm-tabell .adm-cell--nr { font-weight: 400; }
+.adm-tabell--tillfallen td:first-child { width: 30%; }
+
+/* ---------- Bokningsdetalj ---------- */
+.adm-bokning__namn { display: flex; align-items: center; gap: var(--space-16); flex-wrap: wrap; }
+.adm-bokning__knappar { display: flex; align-items: center; gap: var(--space-8); }
+.adm-bokning { display: grid; gap: var(--space-24); grid-template-columns: minmax(0, 1fr) minmax(0, 440px); align-items: start; }
+.adm-kort { padding: var(--space-24); display: grid; gap: var(--space-12); }
+.adm-kort__rubrik { font-size: var(--text-h3); font-weight: 500; }
+.adm-nyckelvarde { margin: 0; }
+.adm-nyckelvarde > div { display: grid; grid-template-columns: 172px minmax(0, 1fr); gap: var(--space-16); align-items: center; padding-block: var(--space-12); min-height: 52px; }
+.adm-nyckelvarde > div + div { border-top: 1px solid var(--border-default); }
+.adm-nyckelvarde dt { color: var(--text-secondary); }
+.adm-nyckelvarde dd { margin: 0; font-weight: 500; }
+.adm-kort--deltagare .adm-nyckelvarde > div { grid-template-columns: 128px minmax(0, 1fr); }
+
+/* ---------- Mellanbred skärm: smalare sidomeny-yta, sökfält krymper ---------- */
+@media (max-width: 1279px) {
+  .adm-topp__sok { width: auto; flex: 1; max-width: 360px; }
+  .adm-bokning { grid-template-columns: 1fr; }
+  .adm-kort--deltagare { max-width: 640px; }
+}
+
+/* ---------- Surfplatta och mobil: sidomenyn blir en panel ---------- */
+@media (max-width: 1023px) {
+  .adm-sidomeny {
+    position: fixed; z-index: 40; left: 0; top: 0; bottom: 0;
+    transform: translateX(-100%); transition: transform 0.2s ease;
+    box-shadow: var(--shadow-floating);
+  }
+  .adm-sidomeny[data-oppen='true'] { transform: none; }
+  .adm-sidomeny__stang { display: inline-grid; }
+  .adm-skugga { position: fixed; inset: 0; z-index: 30; background: rgb(32 34 48 / 0.4); }
+  .adm-topp { padding: 0 var(--space-24); height: 64px; }
+  .adm-topp__logo { display: block; font-size: 1.125rem; }
+  .adm-topp__meny { display: inline-grid; }
+  .adm-sida { padding: var(--space-24); }
+}
+@media (prefers-reduced-motion: reduce) { .adm-sidomeny { transition: none; } }
+
+@media (max-width: 767px) {
+  .adm-topp__sok, .adm-topp__ikon, .adm-topp__avdelare, .adm-anvandare__namn, .adm-anvandare__pil { display: none; }
+  .adm-anvandare img { width: 32px; height: 32px; }
+  .adm-topp__hoger { gap: var(--space-12); }
+  .adm-topp__meny { margin-right: -8px; }
+
+  .adm-sida { padding: var(--space-24) var(--space-24) var(--space-40); }
+  .adm-sidhuvud--rad { display: grid; gap: var(--space-12); }
+  .adm-manad { margin-left: -8px; }
+  .adm-manad p { min-width: 0; font-size: 1rem; }
+  .adm-sidhuvud__rubrikrad, .adm-verktyg { display: grid; gap: var(--space-12); justify-content: stretch; }
+  .adm-sidhuvud__rubrikrad .button, .adm-verktyg__knapp { width: 100%; }
+  .adm-meta { display: grid; gap: var(--space-8); }
+  .adm-verktyg__sok, .adm-filter, .adm-filter .search-field { width: 100%; }
+  .adm-filter { display: grid; }
+  .adm-select select { width: 100%; }
+  .flikvaljare { width: fit-content; }
+  .adm-bokning__knappar .button { flex: 1; }
+  .adm-nyckelvarde > div,
+  .adm-kort--deltagare .adm-nyckelvarde > div { grid-template-columns: 120px minmax(0, 1fr); gap: var(--space-12); }
+  .adm-nyckelvarde dt { font-size: var(--text-caption); overflow-wrap: anywhere; }
+  .adm-kort { padding: var(--space-16); }
+}
+
+/* Tabeller blir kort när det inte finns plats för kolumnerna.
+   Första cellen blir kortets rubrik, övriga celler visar etikett + värde. */
+@media (max-width: 899px) {
+  .adm-tabell-ram { background: none; border: 0; border-radius: 0; overflow: visible; }
+  .adm-tabell, .adm-tabell tbody { display: block; }
+  .adm-tabell thead { display: none; }
+  .adm-tabell tbody tr {
+    display: grid; gap: 10px; padding: var(--space-16);
+    background: var(--surface-card); border: 1px solid var(--border-default); border-radius: var(--radius-md);
+  }
+  .adm-tabell tbody tr + tr { margin-top: var(--space-12); }
+  .adm-tabell tbody tr + tr td { border-top: 0; }
+  .adm-tabell td, .adm-tabell td:first-child, .adm-tabell td:last-child { height: auto; padding: 0; width: auto; }
+  .adm-tabell td[data-label] { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: var(--space-12); align-items: start; }
+  .adm-tabell td[data-label]::before { content: attr(data-label); color: var(--text-secondary); font-size: var(--text-caption); line-height: 1.6; font-weight: 400; }
+  .adm-tabell td[data-label] > * { grid-column: 2; }
+  .adm-tabell td[data-label] > .status { justify-self: start; }
+  .adm-tabell td.adm-cell--titel { display: grid; gap: 2px; font-weight: 500; }
+  .adm-tabell .adm-cell--nr { font-weight: 500; }
+  .adm-cell--atgarder { display: flex; align-items: center; gap: var(--space-12); text-align: left; padding-top: 6px !important; }
+  .adm-cell--atgarder .text-link { margin-right: auto; }
+}

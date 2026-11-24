@@ -11,6 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as BokaIndexRouteImport } from './routes/boka.index'
+import { Route as BokaBekraftelseRouteImport } from './routes/boka.bekraftelse'
+import { Route as BokaGranskaRouteImport } from './routes/boka.granska'
+import { Route as AdminBokningNrRouteImport } from './routes/admin.bokning.$nr'
+import { Route as AdminTillfalleDatumRouteImport } from './routes/admin.tillfalle.$datum'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,9 +28,50 @@ const AdminRoute = AdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 })
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+})
+const BokaIndexRoute = BokaIndexRouteImport.update({
+  id: '/boka/',
+  path: '/boka/',
+  getParentRoute: () => rootRouteImport,
+})
+const BokaBekraftelseRoute = BokaBekraftelseRouteImport.update({
+  id: '/boka/bekraftelse',
+  path: '/boka/bekraftelse',
+  getParentRoute: () => rootRouteImport,
+})
+const BokaGranskaRoute = BokaGranskaRouteImport.update({
+  id: '/boka/granska',
+  path: '/boka/granska',
+  getParentRoute: () => rootRouteImport,
+})
+const AdminBokningNrRoute = AdminBokningNrRouteImport.update({
+  id: '/bokning/$nr',
+  path: '/bokning/$nr',
+  getParentRoute: () => AdminRoute,
+})
+const AdminTillfalleDatumRoute = AdminTillfalleDatumRouteImport.update({
+  id: '/tillfalle/$datum',
+  path: '/tillfalle/$datum',
+  getParentRoute: () => AdminRoute,
+})
+
+const AdminRouteChildren = {
+  AdminIndexRoute: AdminIndexRoute,
+  AdminBokningNrRoute: AdminBokningNrRoute,
+  AdminTillfalleDatumRoute: AdminTillfalleDatumRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 const rootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminRoute: AdminRoute,
+  AdminRoute: AdminRouteWithChildren,
+  BokaBekraftelseRoute: BokaBekraftelseRoute,
+  BokaGranskaRoute: BokaGranskaRoute,
+  BokaIndexRoute: BokaIndexRoute,
 }
 export const routeTree = rootRouteImport._addFileChildren(rootRouteChildren)

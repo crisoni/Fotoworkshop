@@ -1,11 +1,17 @@
 export default { title: 'Stilguide' }
 
 const colors = {
-  Sidbakgrund: '--color-page',
-  Kortyta: '--color-surface',
-  Text: '--color-text',
-  Accent: '--color-accent',
-  Kantlinje: '--color-line',
+  'Sidbakgrund (Paper)': '--surface-subtle',
+  'Kortyta (Canvas)': '--surface-card',
+  'Aktiv meny (Porcelain)': '--bg-page',
+  'Text (Ink)': '--text-primary',
+  'Sekundär text (Steel)': '--text-secondary',
+  'Primär handling och länkar (Aubergine)': '--action-primary',
+  'Valt datum och tid (Ink)': '--action-selected',
+  'Workshopdatum i kalendern (Lavender Haze)': '--surface-brand-soft',
+  'Betyg och status (Ember)': '--icon-accent',
+  'Kantlinje (Chalk)': '--border-default',
+  'Kantlinje stark (Mist)': '--border-strong',
 }
 
 export const Farger = {
@@ -28,9 +34,12 @@ export const Farger = {
 export const Textroller = {
   render: () => (
     <>
-      <h1>Sidans huvudrubrik</h1>
-      <h2>Rubrik på ett workshopkort</h2>
-      <p>Brödtexten berättar vad deltagaren behöver veta om workshopen.</p>
+      <h1>Display H1 – Ta kontroll över din kamera</h1>
+      <h2>Heading H2 – Om workshoppen</h2>
+      <h3>Heading H3 – Dina uppgifter</h3>
+      <p>Body – Brödtexten berättar vad deltagaren behöver veta om workshoppen.</p>
+      <p className="caption">Caption – Steg 1 av 2 · Ta kontroll över din kamera</p>
+      <p className="label">Label – Tillfälle</p>
     </>
   ),
 }
