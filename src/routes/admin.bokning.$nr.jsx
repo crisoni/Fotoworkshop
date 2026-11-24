@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { ejIPrototypen, Statusbricka, Tillbakalank } from '../components/AdminLayout'
+import { Statusbricka, Tillbakalank } from '../components/AdminLayout'
 import { Ikon } from '../components/Ikon'
 import { useBokning } from '../bokningar'
 import { workshop, tillfalleMedId, formatPris } from '../data'
@@ -58,12 +58,6 @@ function Bokning() {
           </div>
           <div className="adm-bokning__knappar">
             <a href={`mailto:${b.epost}`} className="button">Skicka e-post</a>
-            <button type="button" className="icon-button" {...ejIPrototypen}>
-              <Ikon namn="penna" /><span className="visually-hidden">Redigera bokningen</span>
-            </button>
-            <button type="button" className="icon-button" {...ejIPrototypen}>
-              <Ikon namn="prickar" /><span className="visually-hidden">Fler val</span>
-            </button>
           </div>
         </div>
         <p className="adm-underrubrik">Bokning {b.nr} · {workshop.titel}</p>

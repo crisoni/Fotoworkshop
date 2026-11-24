@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound, useNavigate } from '@tanstack/react-router'
-import { ejIPrototypen, Statusbricka, Tillbakalank } from '../components/AdminLayout'
+import { Statusbricka, Tillbakalank } from '../components/AdminLayout'
 import { Ikon } from '../components/Ikon'
 import { useBokning, matchar } from '../bokningar'
 import { workshop, tillfalleMedId, formatPris } from '../data'
@@ -30,7 +30,6 @@ function Tillfalle() {
         <Tillbakalank to="/admin">Alla tillfällen</Tillbakalank>
         <div className="adm-sidhuvud__rubrikrad">
           <h1>{workshop.titel}</h1>
-          <a href="#" className="button" {...ejIPrototypen}><Ikon namn="plus" />Lägg till deltagare</a>
         </div>
         <ul className="adm-meta">
           <li><Ikon namn="kalender" />{tillfalle.helt}</li>
@@ -91,9 +90,6 @@ function Tillfalle() {
                       Visa bokning<span className="visually-hidden"> {b.nr}, {b.namn}</span>
                       <Ikon namn="vinkel-hoger" />
                     </Link>
-                    <button type="button" className="icon-button" {...ejIPrototypen}>
-                      <Ikon namn="prickar" /><span className="visually-hidden">Fler val för {b.namn}</span>
-                    </button>
                   </td>
                 </tr>
               ))}

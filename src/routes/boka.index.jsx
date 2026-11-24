@@ -13,7 +13,8 @@ export const Route = createFileRoute('/boka/')({
 })
 
 // Steg 1 av 2: välj datum och tid, fyll i namn och e-post.
-// Mobil (ram 02–05): Dina uppgifter → Välj datum → Välj tid → Fortsätt.
+// Mobil: Välj datum → Välj tid → Dina uppgifter → Fortsätt. Datumet är det viktigaste valet,
+// så det kommer först (ändrat efter design critique, Figma-ramarna 02–05 har uppgifterna först).
 // Dator (ram D02–D05): kalender och tid till vänster, uppgifter och Fortsätt i ett kort till höger.
 function Boka() {
   const { utkast, uppdatera } = useBokning()
@@ -51,6 +52,34 @@ function Boka() {
           <p className="caption">Steg 1 av 2 · {workshop.titel}</p>
         </div>
 
+        <section className="boka__datum" aria-labelledby="datum-rubrik">
+          <h2 className="boka__underrubrik" id="datum-rubrik">Välj datum</h2>
+          <div id="datum" tabIndex={-1}>
+            <Kalender
+              vald={utkast.tillfalle}
+              onValj={(id) => uppdatera({ tillfalle: id, tid: utkast.tid ?? null })}
+            />
+          </div>
+        </section>
+
+        <section className="boka__tid" aria-labelledby="tid-rubrik">
+          <h2 className="boka__underrubrik" id="tid-rubrik">Välj tid</h2>
+          {utkast.tillfalle ? (
+            <div className="tider">
+              <button
+                type="button"
+                className="tidval"
+                aria-pressed={utkast.tid === workshop.tid}
+                onClick={() => uppdatera({ tid: workshop.tid })}
+              >
+                {workshop.tid}
+              </button>
+            </div>
+          ) : (
+            <p className="caption">Välj ett datum för att se tider.</p>
+          )}
+        </section>
+
         <div className="boka__uppgifter">
           <h2 className="boka__underrubrik" id="uppgifter">Dina uppgifter</h2>
           <div className="boka__falt">
@@ -84,34 +113,6 @@ function Boka() {
             </div>
           </div>
         </div>
-
-        <section className="boka__datum" aria-labelledby="datum-rubrik">
-          <h2 className="boka__underrubrik" id="datum-rubrik">Välj datum</h2>
-          <div id="datum" tabIndex={-1}>
-            <Kalender
-              vald={utkast.tillfalle}
-              onValj={(id) => uppdatera({ tillfalle: id, tid: utkast.tid ?? null })}
-            />
-          </div>
-        </section>
-
-        <section className="boka__tid" aria-labelledby="tid-rubrik">
-          <h2 className="boka__underrubrik" id="tid-rubrik">Välj tid</h2>
-          {utkast.tillfalle ? (
-            <div className="tider">
-              <button
-                type="button"
-                className="tidval"
-                aria-pressed={utkast.tid === workshop.tid}
-                onClick={() => uppdatera({ tid: workshop.tid })}
-              >
-                {workshop.tid}
-              </button>
-            </div>
-          ) : (
-            <p className="caption">Välj ett datum för att se tider.</p>
-          )}
-        </section>
 
         <div className="boka__handling">
           <button type="submit" className="button button--block" disabled={!klart}>Fortsätt</button>

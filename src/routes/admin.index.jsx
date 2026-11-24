@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
-import { ejIPrototypen, Statusbricka } from '../components/AdminLayout'
+import { Statusbricka } from '../components/AdminLayout'
 import { Ikon } from '../components/Ikon'
 import { useBokning, matchar } from '../bokningar'
 import { workshop, tillfallen, tillfalleMedId, formatPris } from '../data'
@@ -46,11 +46,6 @@ function Oversikt() {
           <Link to="/admin" search={{}} activeOptions={{ exact: true, includeSearch: false }} activeProps={{}} aria-current={!visarDeltagare ? 'page' : undefined} data-vald={!visarDeltagare}>Tillfällen</Link>
           <Link to="/admin" search={{ vy: 'deltagare' }} activeOptions={{ exact: true, includeSearch: false }} activeProps={{}} aria-current={visarDeltagare ? 'page' : undefined} data-vald={visarDeltagare}>Alla deltagare</Link>
         </nav>
-        {!visarDeltagare && (
-          <a href="#" className="button adm-verktyg__knapp" {...ejIPrototypen}>
-            <Ikon namn="plus" />Nytt tillfälle
-          </a>
-        )}
         {visarDeltagare && <DeltagarFilter />}
       </div>
 
@@ -89,7 +84,7 @@ function Tillfallen() {
                   <span className="adm-stark">{workshop.titel}</span>
                   <span className="caption">{workshop.plats}</span>
                 </td>
-                <td data-label="Datum">
+                <td data-label="Datum" className="adm-cell--datum">
                   <span className="adm-stark">{t.lang}</span>
                   <span className="caption">kl {workshop.tid}</span>
                 </td>
@@ -100,12 +95,6 @@ function Tillfallen() {
                     Visa deltagare<span className="visually-hidden"> {t.kort}</span>
                     <Ikon namn="vinkel-hoger" />
                   </Link>
-                  <button type="button" className="icon-button" {...ejIPrototypen}>
-                    <Ikon namn="penna" /><span className="visually-hidden">Redigera {t.kort}</span>
-                  </button>
-                  <button type="button" className="icon-button" {...ejIPrototypen}>
-                    <Ikon namn="prickar" /><span className="visually-hidden">Fler val för {t.kort}</span>
-                  </button>
                 </td>
               </tr>
             )

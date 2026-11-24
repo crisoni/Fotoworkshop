@@ -34,6 +34,7 @@
   --border-default: var(--chalk);
   --border-strong: var(--mist);
   --border-focus: var(--aubergine);
+  --border-input: var(--steel); /* fält, sökfält och valknappar: 6,6:1 mot vitt (minst 3:1 krävs) */
   --action-primary: var(--aubergine);
   --action-disabled: var(--chalk);
   --action-selected: var(--ink);
@@ -175,7 +176,7 @@ p { margin: 0; }
 .search-field {
   display: flex; align-items: center; gap: var(--space-8);
   height: 44px; padding: 0 var(--space-16);
-  background: var(--surface-card); border: 1px solid var(--border-strong); border-radius: var(--radius-sm);
+  background: var(--surface-card); border: 1px solid var(--border-input); border-radius: var(--radius-sm);
 }
 .search-field svg { flex: none; color: var(--text-secondary); }
 .search-field input { flex: 1; min-width: 0; border: 0; outline: 0; background: none; font-size: 1rem; }

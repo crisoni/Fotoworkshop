@@ -3,13 +3,8 @@ import { Link, useNavigate, useRouterState } from '@tanstack/react-router'
 import { Ikon } from './Ikon'
 import './Admin.css'
 
-// Funktioner som syns i designen men inte ingår i uppgiften (avgränsningen i casebladet).
-// De ser ut som i Figma men gör ingenting när man klickar.
-export const ejIPrototypen = {
-  'aria-disabled': 'true',
-  title: 'Ingår inte i den här versionen',
-  onClick: (e) => e.preventDefault(),
-}
+// Menyval och knappar som ingår i designen men inte i uppgiften (avgränsningen i casebladet)
+// visas som inaktiva, så att ingen tror att de ska fungera.
 
 const meny = [
   { namn: 'Dashboard', ikon: 'appar' },
@@ -33,10 +28,10 @@ function Menyval({ val }) {
     )
   }
   return (
-    <a href="#" className="adm-meny__val" {...ejIPrototypen}>
+    <span className="adm-meny__val adm-meny__val--inaktiv" aria-disabled="true" title="Ingår inte i den här versionen">
       <Ikon namn={val.ikon} />
       <span>{val.namn}</span>
-    </a>
+    </span>
   )
 }
 
@@ -92,17 +87,17 @@ export function AdminLayout({ children }) {
             <input
               id="sok-allt"
               type="search"
-              placeholder="Sök workshop, deltagare eller bokning"
+              placeholder="Sök deltagare eller bokningsnr"
               value={sok}
               onChange={(e) => setSok(e.target.value)}
             />
           </form>
           <div className="adm-topp__hoger">
-            <button type="button" className="icon-button adm-topp__ikon" {...ejIPrototypen}>
-              <Ikon namn="fraga" /><span className="visually-hidden">Hjälp</span>
+            <button type="button" className="icon-button adm-topp__ikon" disabled title="Ingår inte i den här versionen">
+              <Ikon namn="fraga" /><span className="visually-hidden">Hjälp (ingår inte)</span>
             </button>
-            <button type="button" className="icon-button adm-topp__ikon" {...ejIPrototypen}>
-              <Ikon namn="notiser" /><span className="visually-hidden">Notiser</span>
+            <button type="button" className="icon-button adm-topp__ikon" disabled title="Ingår inte i den här versionen">
+              <Ikon namn="notiser" /><span className="visually-hidden">Notiser (ingår inte)</span>
             </button>
             <span className="adm-topp__avdelare" aria-hidden="true" />
             <div className="adm-anvandare">

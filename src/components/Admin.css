@@ -22,7 +22,8 @@
   display: flex; align-items: center; gap: var(--space-12); height: 44px; padding: 0 var(--space-12);
   border-radius: var(--radius-sm); color: var(--text-secondary); text-decoration: none;
 }
-.adm-meny__val[aria-disabled='true'] { cursor: default; }
+.adm-meny__val--inaktiv { color: var(--text-disabled); cursor: default; }
+.adm-topp__ikon:disabled { color: var(--text-disabled); cursor: default; background: none; }
 .adm-meny__val--aktiv { background: var(--bg-page); color: var(--text-primary); font-weight: 500; }
 .adm-meny__val--aktiv svg { color: var(--icon-brand); }
 
@@ -46,8 +47,6 @@
 .adm-anvandare__namn .caption { font-weight: 400; }
 .adm-anvandare__pil { color: var(--text-secondary); }
 
-.icon-button[aria-disabled='true'], .button[aria-disabled='true'] { cursor: default; }
-.button[aria-disabled='true'] { background: var(--action-primary); color: var(--text-on-action); }
 
 /* ---------- Innehåll ---------- */
 .adm-innehall { flex: 1; }
@@ -81,7 +80,7 @@
 /* Flikväljare: Tillfällen | Alla deltagare */
 .flikvaljare {
   display: inline-flex; gap: 2px; padding: 3px;
-  background: var(--surface-card); border: 1px solid var(--border-strong); border-radius: var(--radius-sm);
+  background: var(--surface-card); border: 1px solid var(--border-input); border-radius: var(--radius-sm);
 }
 .flikvaljare a {
   padding: 8px 12px; border-radius: 6px; color: var(--text-primary); text-decoration: none; line-height: 1.5;
@@ -92,7 +91,7 @@
 .adm-select { position: relative; }
 .adm-select select {
   appearance: none; height: 44px; padding: 0 40px 0 var(--space-12);
-  border: 1px solid var(--border-strong); border-radius: var(--radius-sm); background: var(--surface-card);
+  border: 1px solid var(--border-input); border-radius: var(--radius-sm); background: var(--surface-card);
   font-size: 1rem; cursor: pointer;
 }
 .adm-select svg { position: absolute; right: 12px; top: 12px; pointer-events: none; color: var(--text-secondary); }
@@ -169,13 +168,14 @@
   .adm-manad { margin-left: -8px; }
   .adm-manad p { min-width: 0; font-size: 1rem; }
   .adm-sidhuvud__rubrikrad, .adm-verktyg { display: grid; gap: var(--space-12); justify-content: stretch; }
-  .adm-sidhuvud__rubrikrad .button, .adm-verktyg__knapp { width: 100%; }
+  .adm-sidhuvud__rubrikrad .button { width: 100%; }
+  /* Bokningsdetalj: "Skicka e-post till …" finns redan i Deltagare-kortet, så knappen överst tas bort på mobil */
+  .adm-bokning__knappar { display: none; }
   .adm-meta { display: grid; gap: var(--space-8); }
   .adm-verktyg__sok, .adm-filter, .adm-filter .search-field { width: 100%; }
   .adm-filter { display: grid; }
   .adm-select select { width: 100%; }
   .flikvaljare { width: fit-content; }
-  .adm-bokning__knappar .button { flex: 1; }
   .adm-nyckelvarde > div,
   .adm-kort--deltagare .adm-nyckelvarde > div { grid-template-columns: 120px minmax(0, 1fr); gap: var(--space-12); }
   .adm-nyckelvarde dt { font-size: var(--text-caption); overflow-wrap: anywhere; }
@@ -203,4 +203,11 @@
   .adm-tabell .adm-cell--nr { font-weight: 500; }
   .adm-cell--atgarder { display: flex; align-items: center; gap: var(--space-12); text-align: left; padding-top: 6px !important; }
   .adm-cell--atgarder .text-link { margin-right: auto; }
+
+  /* Tillfällen: datumet är det som skiljer korten åt, så det blir kortets rubrik */
+  .adm-tabell--tillfallen td.adm-cell--titel { display: none; }
+  .adm-tabell--tillfallen td.adm-cell--datum { display: grid; grid-template-columns: 1fr; gap: 2px; }
+  .adm-tabell--tillfallen td.adm-cell--datum::before { content: none; }
+  .adm-tabell--tillfallen td.adm-cell--datum > * { grid-column: 1; }
+  .adm-tabell--tillfallen td.adm-cell--datum .adm-stark { font-size: var(--text-h3); }
 }

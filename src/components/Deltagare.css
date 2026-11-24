@@ -81,7 +81,7 @@
 .falt { display: grid; gap: var(--space-8); }
 .falt input {
   height: 48px; width: 100%; padding: 0 var(--space-16);
-  border: 1px solid var(--border-strong); border-radius: var(--radius-sm);
+  border: 1px solid var(--border-input); border-radius: var(--radius-sm);
   background: var(--surface-card); font-size: 1rem;
 }
 .falt input::placeholder { color: var(--text-secondary); }
@@ -101,9 +101,10 @@
   display: inline-grid; place-items: center; width: 40px; height: 40px;
   border-radius: var(--radius-full); border: 0; font-size: 1rem;
 }
-.kalender__dag--inaktiv { color: var(--text-disabled); font-size: var(--text-caption); }
-.kalender__dag--ledig { background: var(--surface-brand-soft); font-weight: 500; cursor: pointer; }
-.kalender__dag--ledig:hover { box-shadow: inset 0 0 0 2px var(--aubergine); }
+.kalender__dag--inaktiv { color: var(--text-secondary); font-size: var(--text-caption); }
+/* Valbara datum: lila fyllning och lila kant, så att de syns även för den som ser färger svagt */
+.kalender__dag--ledig { background: var(--surface-brand-soft); box-shadow: inset 0 0 0 1.5px var(--aubergine); font-weight: 500; cursor: pointer; }
+.kalender__dag--ledig:hover { box-shadow: inset 0 0 0 2.5px var(--aubergine); }
 .kalender__dag--vald { background: var(--action-selected); color: var(--text-on-action); font-weight: 500; cursor: pointer; }
 @media (max-width: 359px) { .kalender__dag { width: 34px; height: 34px; } }
 
@@ -111,7 +112,7 @@
 .tider { display: flex; flex-wrap: wrap; gap: var(--space-8); }
 .tidval {
   height: 44px; padding: 0 var(--space-16); border-radius: var(--radius-sm);
-  border: 1px solid var(--border-strong); background: var(--surface-card);
+  border: 1px solid var(--border-input); background: var(--surface-card);
   font-weight: 500; cursor: pointer;
 }
 .tidval[aria-pressed='true'] { background: var(--action-selected); border-color: var(--action-selected); color: var(--text-on-action); }
