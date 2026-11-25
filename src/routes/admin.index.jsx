@@ -82,7 +82,6 @@ function Tillfallen() {
               <tr key={t.id}>
                 <td className="adm-cell--titel">
                   <span className="adm-stark">{workshop.titel}</span>
-                  <span className="caption">{workshop.plats}</span>
                 </td>
                 <td data-label="Datum" className="adm-cell--datum">
                   <span className="adm-stark">{t.lang}</span>
