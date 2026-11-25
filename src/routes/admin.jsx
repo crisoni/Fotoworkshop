@@ -1,15 +1,17 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Outlet } from '@tanstack/react-router'
+import { AdminLayout } from '../components/AdminLayout'
 
+// Arrangörens adminsida. Arrangören antas redan vara inloggad (casebladet).
+// Sidorna under /admin delar sidomeny och toppfält.
 export const Route = createFileRoute('/admin')({
   component: Admin,
-  head: () => ({ meta: [{ title: 'Admin · Fotoworkshopen' }] }),
+  head: () => ({ meta: [{ title: 'Bokningar · Ljusrum admin' }] }),
 })
 
 function Admin() {
   return (
-    <>
-      <h1>Kurstillfällen</h1>
-      <p>Här bygger du arrangörens vy för tillfällen och bokningar.</p>
-    </>
+    <AdminLayout>
+      <Outlet />
+    </AdminLayout>
   )
 }

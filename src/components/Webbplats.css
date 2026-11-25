@@ -1,0 +1,193 @@
+/* Besökarnas sidor på vit bakgrund (Canvas). Korten får kant i Mist så att de håller ihop
+   som grupper även utan färgskillnad mot sidan. Adminvyn behåller Paper. */
+.webb { min-height: 100dvh; display: flex; flex-direction: column; background: var(--surface-card); }
+.webb .card, .webb .prisrad { border-color: var(--border-strong); }
+
+
+/* ---------- Sidhuvud (Topbar 64 px) ---------- */
+.webb-huvud {
+  position: sticky; top: 0; z-index: 20;
+  background: var(--surface-card); border-bottom: 1px solid var(--border-default);
+}
+.webb-huvud__rad {
+  width: min(100% - 2 * var(--space-24), 1200px); margin-inline: auto;
+  min-height: 64px; display: flex; align-items: center; justify-content: space-between;
+  position: relative;
+}
+.logotyp {
+  font-size: 1.125rem; font-weight: 500; line-height: 1.3; letter-spacing: 0.08em;
+  color: var(--text-primary); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.webb-huvud__knapp { margin-right: -8px; }
+
+.webb-nav { display: flex; gap: var(--space-32); }
+.webb-nav a { color: var(--text-primary); font-weight: 500; text-decoration: none; padding-block: var(--space-8); }
+.webb-nav a:hover { color: var(--text-link); }
+.webb-nav a[aria-current='page'] { color: var(--text-link); }
+
+/* Mobil: fullskärmsmeny under sidhuvudet. Stora länkar glider upp en i taget,
+   Boka-knappen ligger nederst nära tummen. Menyknappens streck blir ett kryss. */
+.webb-nav__boka { display: none; }
+.hamburgare { position: relative; display: block; width: 22px; height: 16px; }
+.hamburgare span {
+  position: absolute; left: 0; right: 0; height: 2px; border-radius: 2px; background: currentColor;
+  transition: transform 0.35s cubic-bezier(0.7, 0, 0.2, 1), opacity 0.2s;
+}
+.hamburgare span:nth-child(1) { top: 0; }
+.hamburgare span:nth-child(2) { top: 7px; }
+.hamburgare span:nth-child(3) { top: 14px; }
+.hamburgare[data-oppen='true'] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburgare[data-oppen='true'] span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburgare[data-oppen='true'] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 767px) {
+  .meny-oppen, .meny-oppen body { overflow: hidden; }
+  .webb-nav {
+    position: fixed; top: 64px; left: 0; right: 0; height: calc(100dvh - 64px);
+    display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-32);
+    padding: var(--space-32) var(--space-24) calc(var(--space-24) + env(safe-area-inset-bottom));
+    background: var(--surface-card); overflow-y: auto;
+    opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0s linear 0.3s;
+  }
+  .webb-nav[data-oppen='true'] { opacity: 1; visibility: visible; transition: opacity 0.3s; }
+  .webb-nav__lankar { display: grid; gap: var(--space-4); }
+  .webb-nav .webb-nav__lankar a {
+    font-size: 2rem; font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; padding: var(--space-8) 0;
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.5s, transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .webb-nav[data-oppen='true'] .webb-nav__lankar a { opacity: 1; transform: none; }
+  .webb-nav[data-oppen='true'] .webb-nav__lankar a:nth-child(1) { transition-delay: 0.08s; }
+  .webb-nav[data-oppen='true'] .webb-nav__lankar a:nth-child(2) { transition-delay: 0.14s; }
+  .webb-nav[data-oppen='true'] .webb-nav__lankar a:nth-child(3) { transition-delay: 0.2s; }
+  .webb-nav[data-oppen='true'] .webb-nav__lankar a:nth-child(4) { transition-delay: 0.26s; }
+  .webb-nav[data-oppen='true'] .webb-nav__lankar a:nth-child(5) { transition-delay: 0.32s; }
+  .webb-nav .webb-nav__boka {
+    display: inline-flex; color: var(--text-on-action); min-height: 52px; padding-block: 0;
+    opacity: 0; transform: translateY(16px); transition: opacity 0.5s, transform 0.5s;
+  }
+  .webb-nav[data-oppen='true'] .webb-nav__boka { opacity: 1; transform: none; transition-delay: 0.4s; }
+  .webb-nav .webb-nav__boka:hover { color: var(--text-on-action); }
+}
+@media (max-width: 767px) and (prefers-reduced-motion: reduce) {
+  .webb-nav .webb-nav__lankar a, .webb-nav .webb-nav__boka { transform: none; transition: opacity 0.2s; transition-delay: 0s !important; }
+  .hamburgare span { transition: none; }
+}
+@media (min-width: 768px) {
+  .webb-huvud .webb-huvud__knapp { display: none; }
+  .webb-nav__lankar { display: contents; }
+}
+
+/* ---------- Innehåll ---------- */
+.webb-main { flex: 1; width: 100%; }
+.sida {
+  width: min(100% - 2 * var(--space-24), 1200px); margin-inline: auto;
+  padding-block: var(--space-16) var(--space-40);
+}
+.sida--smal { width: min(100% - 2 * var(--space-24), 640px); }
+@media (min-width: 960px) {
+  .sida { padding-block: 56px 80px; }
+}
+
+/* Sidrubrik med tillbakapil, klickyta 40×40 */
+.sidrubrik { display: grid; gap: var(--space-4); }
+.sidrubrik__rad { display: flex; align-items: center; gap: var(--space-8); margin-left: -8px; }
+.sidrubrik__rad h1 { font-size: var(--text-h2); line-height: 1.25; }
+.tillbaka {
+  display: inline-grid; place-items: center; width: 40px; height: 40px; flex: none;
+  border-radius: var(--radius-sm); color: var(--text-primary);
+}
+.tillbaka:hover { background: var(--porcelain); }
+
+/* ---------- Sidfot ----------
+   Mörk sidfot i Obsidian. Överst kolumner med länkar, underst en smal rad med logotyp,
+   copyright och arrangörsinloggning. Kontrast: Chalk 10,5:1, Lavender Haze 9,4:1. */
+.webb-fot { background: var(--obsidian); color: var(--chalk); font-size: var(--text-caption); line-height: 1.6; }
+.webb-fot__inre { width: min(100% - 2 * var(--space-24), 1200px); margin-inline: auto; }
+.webb-fot a { color: var(--chalk); text-decoration: none; }
+.webb-fot a:hover { color: var(--canvas); text-decoration: underline; text-underline-offset: 0.2em; }
+.webb-fot :focus-visible { outline-color: var(--lavender-haze); }
+
+.webb-fot__kolumner {
+  display: grid; gap: var(--space-32);
+  padding-block: 56px var(--space-40);
+}
+.webb-fot__varumarke { display: grid; gap: var(--space-12); align-content: start; max-width: 22rem; }
+.webb-fot__logo {
+  font-size: 1.125rem; font-weight: 500; letter-spacing: 0.08em; line-height: 1.3;
+  color: var(--canvas) !important; text-decoration: none !important; width: fit-content;
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.webb-fot .logomarke { color: var(--lavender-haze); }
+.webb-fot__logo--liten { gap: 8px; }
+.webb-fot__logo--liten { font-size: 1rem; }
+.webb-fot__kolumn { display: grid; gap: var(--space-12); align-content: start; }
+.webb-fot__rubrik { font-size: var(--text-body); font-weight: 500; color: var(--canvas); }
+.webb-fot ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-8); }
+.webb-fot__kolumn a { display: inline-block; padding-block: 2px; }
+.webb-fot__notis { color: var(--mist); }
+
+.webb-fot__botten {
+  display: grid; gap: var(--space-12); justify-items: start;
+  padding-block: var(--space-24) var(--space-32);
+  border-top: 1px solid #3d4055;
+}
+.webb-fot__lankar { display: flex; flex-wrap: wrap; gap: var(--space-8) var(--space-24); }
+.webb-fot__lank-accent { background: none; border: 0; padding: 0; font: inherit; cursor: pointer; }
+.webb-fot__lank-accent:hover { color: var(--canvas); text-decoration: underline; text-underline-offset: 0.2em; }
+.webb-fot__hoger { display: flex; align-items: center; gap: var(--space-24); }
+.webb-fot ul.webb-fot__sociala { display: flex; gap: var(--space-4); }
+.webb-fot__social {
+  display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: var(--radius-full);
+}
+.webb-fot a.webb-fot__social:hover { background: #33364a; text-decoration: none; }
+.webb-fot__copy { display: flex; align-items: center; gap: var(--space-16); color: var(--mist); }
+.webb-fot .webb-fot__lank-accent { color: var(--lavender-haze); }
+.webb-fot .webb-fot__lank-accent:hover { color: var(--canvas); }
+.webb-fot__topp { display: inline-flex; align-items: center; gap: var(--space-4); }
+.webb-fot__topp-ikon { transform: rotate(-90deg); }
+
+@media (min-width: 768px) {
+  .webb-fot__kolumner { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .webb-fot__varumarke { grid-column: 1 / -1; }
+  .webb-fot__botten { grid-template-columns: auto 1fr auto; align-items: center; gap: var(--space-32); }
+}
+@media (min-width: 1024px) {
+  .webb-fot__kolumner { grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: var(--space-40); padding-top: 72px; }
+  .webb-fot__varumarke { grid-column: auto; }
+}
+
+/* På workshopsidan ligger prisraden fast i nederkant på mobil, så sidfoten behöver luft */
+.webb--med-prisrad .webb-fot__botten { padding-bottom: 128px; }
+@media (min-width: 960px) {
+  .webb--med-prisrad .webb-fot__botten { padding-bottom: var(--space-32); }
+}
+
+/* Dialog för kakor */
+.kakor {
+  width: min(100% - 2 * var(--space-24), 30rem); padding: var(--space-24);
+  border: 0; border-radius: var(--radius-md); box-shadow: var(--shadow-floating);
+  color: var(--text-primary);
+}
+.kakor::backdrop { background: color-mix(in srgb, var(--obsidian) 50%, transparent); }
+.kakor h2 { font-size: var(--text-h3); font-weight: 700; margin-bottom: var(--space-12); }
+.kakor p + p { margin-top: var(--space-8); }
+.kakor__knappar { display: flex; align-items: center; gap: var(--space-24); margin-top: var(--space-24); flex-wrap: wrap; }
+
+/* Mobil sidfot: kolumnerna två och två, större länktext och luftigare nedre del.
+   Ordning nederst: kakor och inloggning, sociala ikoner, sist logotyp och copyright. */
+@media (max-width: 767px) {
+  .webb-fot { font-size: var(--text-body); }
+  .webb-fot__kolumner { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-40) var(--space-24); padding-top: 48px; }
+  .webb-fot__varumarke { grid-column: 1 / -1; }
+  #kontakt { grid-column: 1 / -1; }
+  .webb-fot__rubrik { font-size: 1.125rem; font-weight: 700; }
+  .webb-fot__kolumn { gap: var(--space-16); }
+  .webb-fot ul { gap: var(--space-12); }
+  .webb-fot__botten { gap: var(--space-32); padding-top: var(--space-40); }
+  .webb-fot__lankar { order: 1; flex-direction: column; align-items: flex-start; gap: var(--space-16); }
+  .webb-fot__hoger { order: 2; width: 100%; justify-content: space-between; }
+  .webb-fot ul.webb-fot__sociala { margin-left: -8px; }
+  .webb-fot__copy { order: 3; font-size: var(--text-caption); }
+}

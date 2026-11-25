@@ -1,3 +1,21 @@
+# Ljusrum – boka en fotoworkshop
+
+Webbplatsen är byggd från Figma-filen *Fotoworkshop – designprinciper* (sidorna 04, 05 och 07). Den fungerar från mobil till dator.
+
+| Adress | Sida |
+| --- | --- |
+| `/` | Workshopsidan |
+| `/boka` | Steg 1: datum, tid, namn och e-post |
+| `/boka/granska` | Steg 2: granska, med Ändra-länkar |
+| `/boka/bekraftelse` | Bekräftelse |
+| `/admin` | Arrangör: tillfällen (`?vy=deltagare` visar alla deltagare) |
+| `/admin/tillfalle/14-november` | Ett tillfälles deltagare |
+| `/admin/bokning/L101` | En bokning |
+
+En bokning som görs på webbplatsen sparas i webbläsaren och syns sedan i adminvyn (ingen server). Bilden på workshopsidan ska ligga i `public/bilder/kamera.jpg`.
+
+---
+
 # Från Figma till webb
 
 Bygg din första komponent på fotoworkshopens hemsida. Du får en fungerande sida med ett exempel att byta ut mot din egen design. Under **Admin** finns en plats för arrangörens vy.

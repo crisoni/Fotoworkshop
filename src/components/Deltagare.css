@@ -1,0 +1,219 @@
+/* Besökarnas sidor: workshopsidan, bokning, granskning och bekräftelse. */
+
+/* ---------- Workshopsidan ---------- */
+.workshop { display: grid; gap: var(--space-40); align-items: start; }
+@media (max-width: 959px) { .sida.workshop { padding-top: 0; } }
+.workshop__innehall { display: grid; gap: 0; min-width: 0; }
+.workshop__innehall > .workshop-card { padding-bottom: 28px; }
+.workshop__avsnitt { display: grid; gap: var(--space-12); padding-block: 28px; }
+
+
+/* Prisrad: flytande kort i nederkant på mobil (16 px från kanterna, delvis genomskinligt),
+   bokningskort till höger som följer med vid scroll på dator. */
+.prisrad {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-16);
+  padding: var(--space-16) var(--space-16) var(--space-16) 20px;
+  border: 1px solid var(--border-default); border-radius: 16px;
+  background: rgb(255 255 255 / 0.8);
+  -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-floating);
+}
+.prisrad__pris { display: grid; gap: 2px; }
+.prisrad__belopp { font-size: 1.125rem; font-weight: 500; line-height: 1.3; }
+.prisrad__knapp { min-width: 120px; }
+
+@media (max-width: 959px) {
+  .prisrad {
+    position: fixed; z-index: 10;
+    left: var(--space-16); right: var(--space-16);
+    bottom: calc(var(--space-16) + env(safe-area-inset-bottom));
+  }
+}
+@media (min-width: 960px) {
+  .workshop { grid-template-columns: minmax(0, 1fr) 400px; gap: var(--space-48, 48px); }
+  .prisrad {
+    position: sticky; top: 104px;
+    padding: 28px; background: var(--surface-card);
+    border-radius: var(--radius-md); box-shadow: none;
+    -webkit-backdrop-filter: none; backdrop-filter: none;
+  }
+}
+
+/* ---------- Bokning, steg 1 ---------- */
+.boka { display: flex; flex-direction: column; gap: var(--space-32); }
+.boka__underrubrik { font-size: var(--text-h3); font-weight: 500; line-height: 1.3; }
+.boka__uppgifter { display: grid; gap: var(--space-16); }
+.boka__falt { display: grid; gap: var(--space-16); }
+.boka__datum, .boka__tid { display: grid; gap: var(--space-12); }
+.boka__datum > div:focus { outline: none; }
+.boka__handling { display: grid; gap: var(--space-12); text-align: center; }
+
+/* Dator: rubriken över båda kolumnerna. Vänster: datum och tid. Höger: "Dina uppgifter" som
+   etikett ovanför ett kort med fälten och Fortsätt. Etiketterna och korten börjar på samma linje. */
+@media (min-width: 960px) {
+  .boka {
+    display: grid; column-gap: 48px; row-gap: 0;
+    grid-template-columns: minmax(0, 1fr) 440px;
+    grid-template-rows: auto auto auto auto 1fr auto;
+  }
+  .boka__rubrik { grid-column: 1 / -1; grid-row: 1; margin-bottom: var(--space-32); }
+  .boka__uppgifter { display: contents; }
+  .boka__uppgifter > .boka__underrubrik { grid-column: 2; grid-row: 2; margin-bottom: var(--space-12); }
+  .boka__datum { grid-column: 1; grid-row: 2 / 6; align-self: start; }
+  .boka__tid { grid-column: 1; grid-row: 6; margin-top: var(--space-32); }
+  .boka__falt, .boka__handling {
+    grid-column: 2; background: var(--surface-card);
+    border: 1px solid var(--border-strong); padding-inline: 28px;
+  }
+  .boka__falt { grid-row: 3; border-bottom: 0; border-radius: var(--radius-md) var(--radius-md) 0 0; padding-top: 28px; }
+  .boka__handling {
+    grid-row: 4; border-top: 0; border-radius: 0 0 var(--radius-md) var(--radius-md);
+    padding-top: var(--space-24); padding-bottom: 28px; align-self: start;
+  }
+}
+
+/* Fält: etikett ovanför, 48 px inmatning. 16 px text så att iOS inte zoomar. */
+.falt { display: grid; gap: var(--space-8); }
+.falt input {
+  height: 48px; width: 100%; padding: 0 var(--space-16);
+  border: 1px solid var(--border-input); border-radius: var(--radius-sm);
+  background: var(--surface-card); font-size: 1rem;
+}
+.falt input::placeholder { color: var(--text-secondary); }
+.falt input:focus { outline: none; border: 2px solid var(--border-focus); padding-inline: 15px; }
+.falt input[aria-invalid='true'] { border-color: #b3261e; }
+.falt__fel { color: #b3261e; font-size: var(--text-caption); }
+
+/* Kalender */
+.kalender { padding: var(--space-16); }
+.kalender__manad { display: flex; align-items: center; justify-content: space-between; padding-bottom: var(--space-8); }
+.kalender__manad .icon-button:disabled { color: var(--text-disabled); cursor: default; background: none; }
+.kalender__manadsnamn { font-weight: 500; }
+.kalender__tabell { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.kalender__tabell th { height: 28px; font-weight: 500; }
+.kalender__tabell td { height: 44px; padding: 0; text-align: center; }
+.kalender__dag {
+  display: inline-grid; place-items: center; width: 40px; height: 40px;
+  border-radius: var(--radius-full); border: 0; font-size: 1rem;
+}
+.kalender__dag--inaktiv { color: var(--text-secondary); font-size: var(--text-caption); }
+/* Valbara datum: lila fyllning och lila kant, så att de syns även för den som ser färger svagt */
+.kalender__dag--ledig { background: var(--surface-brand-soft); box-shadow: inset 0 0 0 1.5px var(--aubergine); font-weight: 500; cursor: pointer; }
+.kalender__dag--ledig:hover { box-shadow: inset 0 0 0 2.5px var(--aubergine); }
+.kalender__dag--vald { background: var(--action-selected); color: var(--text-on-action); font-weight: 500; cursor: pointer; }
+@media (max-width: 359px) { .kalender__dag { width: 34px; height: 34px; } }
+
+/* Tidval */
+.tider { display: flex; flex-wrap: wrap; gap: var(--space-8); }
+.tidval {
+  height: 44px; padding: 0 var(--space-16); border-radius: var(--radius-sm);
+  border: 1px solid var(--border-input); background: var(--surface-card);
+  font-weight: 500; cursor: pointer;
+}
+.tidval[aria-pressed='true'] { background: var(--action-selected); border-color: var(--action-selected); color: var(--text-on-action); }
+
+/* ---------- Granska ---------- */
+.granska { display: grid; gap: var(--space-24); }
+.granska__kort { display: grid; gap: var(--space-16); padding: var(--space-24) 20px; }
+.granska__grupp { display: grid; gap: var(--space-12); }
+.granska__grupp--tat { gap: var(--space-8); }
+.granska__grupprubrik { display: flex; align-items: center; justify-content: space-between; gap: var(--space-8); }
+.granska__epost { overflow-wrap: anywhere; }
+.granska__pris { display: grid; gap: var(--space-4); }
+.granska__handling { display: grid; gap: var(--space-12); padding-top: var(--space-8); text-align: center; }
+.prisrad-rad { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-8); }
+.belopp { font-size: 1.125rem; font-weight: 500; line-height: 1.3; white-space: nowrap; }
+
+/* ---------- Bekräftelse ---------- */
+.bekraftelse { display: grid; gap: var(--space-24); }
+.bekraftelse__kvitto { display: grid; justify-items: center; gap: var(--space-12); padding-top: var(--space-16); text-align: center; }
+.bekraftelse__kvitto h1:focus { outline: none; }
+.bekraftelse__ikon {
+  display: grid; place-items: center; width: 88px; height: 88px;
+  border-radius: var(--radius-full); background: var(--surface-brand-soft); color: var(--aubergine);
+}
+.bekraftelse__nr { color: var(--text-secondary); font-weight: 500; }
+.bekraftelse__epost { color: var(--text-secondary); overflow-wrap: anywhere; }
+.bekraftelse__detaljer { display: grid; gap: var(--space-12); padding-block: var(--space-8); }
+.bekraftelse__tillbaka { text-align: center; }
+
+/* Fullbokat datum: genomstruket, går inte att välja */
+.kalender__dag--full { color: var(--text-secondary); font-size: var(--text-caption); text-decoration: line-through; }
+
+/* Lediga platser bredvid tidvalet. Få platser kvar visas i Ember. */
+.tider { align-items: center; }
+.platser { display: inline-flex; align-items: center; gap: var(--space-8); font-size: var(--text-caption); color: var(--text-secondary); }
+.platser::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #2e7d4f; }
+.platser--fa { color: var(--text-primary); }
+.platser--fa::before { background: var(--ember); }
+
+/* Betalning på plats: tydlig rad i granska-kortet */
+.betalning {
+  display: flex; gap: var(--space-12); align-items: flex-start;
+  padding: var(--space-12) var(--space-16); border-radius: var(--radius-sm);
+  background: var(--paper); font-size: var(--text-caption); line-height: 1.5;
+}
+.betalning svg { flex: none; color: var(--icon-brand); margin-top: 1px; }
+.betalning strong { font-weight: 500; }
+
+/* Godkänn villkor: 24 px kryssruta, hela raden är klickbar */
+.villkor { display: grid; gap: var(--space-8); }
+.villkor__rad { display: flex; gap: var(--space-12); align-items: flex-start; cursor: pointer; line-height: 1.5; }
+.villkor__rad input { flex: none; width: 22px; height: 22px; margin: 1px 0 0; accent-color: var(--aubergine); cursor: pointer; }
+.villkor__rad input[aria-invalid='true'] { outline: 2px solid #b3261e; outline-offset: 2px; }
+
+/* Efter bokningen: kalender och vägbeskrivning */
+.efter-bokning { display: grid; gap: var(--space-16); }
+.efter-bokning .button svg { flex: none; }
+.efter-bokning__lankar { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-8) var(--space-32); }
+
+/* Priskortet på dator: större pris och en lista med tillfällen och lediga platser */
+.prisrad__tillfallen { display: none; }
+@media (min-width: 960px) {
+  .prisrad { flex-wrap: wrap; }
+  .prisrad__belopp { font-size: var(--text-h2); font-weight: 700; line-height: 1.2; }
+  .prisrad__tillfallen {
+    display: grid; gap: var(--space-8); flex-basis: 100%;
+    padding-top: var(--space-24); margin-top: var(--space-8); border-top: 1px solid var(--border-default);
+  }
+  .prisrad__tillfallen ul { list-style: none; margin: 0; padding: 0; display: grid; }
+  .tillfalle-rad {
+    width: 100%; display: flex; align-items: center; justify-content: space-between; gap: var(--space-12);
+    padding: var(--space-12); margin-inline: calc(-1 * var(--space-12)); width: calc(100% + 2 * var(--space-12));
+    border: 0; border-radius: var(--radius-sm); background: none; cursor: pointer; text-align: left;
+  }
+  .tillfalle-rad:hover { background: var(--paper); }
+  .tillfalle-rad:hover .tillfalle-rad__datum { color: var(--text-link); }
+  .tillfalle-rad:disabled { cursor: default; background: none; }
+  .tillfalle-rad:disabled .tillfalle-rad__datum { color: var(--text-secondary); text-decoration: line-through; }
+  .tillfalle-rad__datum { font-weight: 500; }
+}
+
+/* ---------- Inför dagen ---------- */
+.infor-dagen { display: grid; gap: var(--space-24); }
+.infor-dagen__varning {
+  display: flex; gap: var(--space-12); align-items: flex-start;
+  padding: var(--space-16); border-radius: var(--radius-md);
+  background: #fdf3e7; border: 1px solid var(--ember);
+}
+.infor-dagen__varning svg { flex: none; color: var(--ember); margin-top: 1px; }
+.infor-dagen__varning strong { font-weight: 500; }
+.infor-dagen__grupp { display: grid; gap: var(--space-12); }
+.infor-dagen__lista { list-style: none; margin: 0; padding: 0; display: grid; }
+.infor-dagen__lista li { display: flex; gap: var(--space-12); align-items: center; padding: var(--space-12) 0; border-bottom: 1px solid var(--border-default); }
+.infor-dagen__lista li:first-child { padding-top: 0; }
+.infor-dagen__lista svg { flex: none; color: #2e7d4f; }
+/* Ingår: ikon i Aubergine per sak, två kolumner på mobil och en rad på större skärmar.
+   Lunch ingår inte: ikonen i Ember och texten säger det, så det inte hänger på färgen. */
+.infor-dagen__ingar { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-12); }
+.infor-dagen__ingar li { display: flex; align-items: center; gap: var(--space-8); min-width: 0; overflow-wrap: anywhere; }
+.infor-dagen__ingar svg { flex: none; color: var(--icon-brand); }
+.infor-dagen__ingar.infor-dagen__ingar--inte svg { color: var(--ember); }
+/* Ingår och Ingår inte: under varandra på mobil, bredvid varandra från 600 px */
+.infor-dagen__ingar-rad { display: grid; gap: var(--space-24); }
+.infor-dagen__ingar-rad .infor-dagen__ingar--inte { grid-template-columns: 1fr; }
+@media (max-width: 359px) { .infor-dagen__ingar { grid-template-columns: 1fr; } }
+@media (min-width: 600px) {
+  .infor-dagen__ingar-rad { display: flex; flex-wrap: wrap; gap: var(--space-24) 56px; }
+  .infor-dagen__ingar { display: flex; flex-wrap: wrap; gap: var(--space-12) var(--space-32); }
+}

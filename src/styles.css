@@ -1,30 +1,199 @@
 @import '@fontsource-variable/dm-sans';
 
-/* Samma värden används på webbsidan och i Storybook. */
+/*
+  Färger, mått och textroller från Figma-filen "Fotoworkshop – designprinciper"
+  (variabelsamlingarna Ljusrum / Färg och Ljusrum / Mått).
+  Samma värden används på webbsidan och i Storybook.
+*/
 :root {
-  --color-page: #f4f3ed;
-  --color-surface: #ffffff;
-  --color-text: #222c28;
-  --color-accent: #285d4c;
-  --color-line: #b7c0b9;
-  --text-body: 1rem;
-  --text-heading: clamp(2rem, 6vw, 3.5rem);
-  --text-card-title: 1.5rem;
-  --space-card: clamp(1rem, 4vw, 2rem);
+  /* Primitiva färger */
+  --ink: #2a2b3f;
+  --steel: #595c73;
+  --fog: #9194ac;
+  --mist: #b7b9cd;
+  --chalk: #d1d2e0;
+  --porcelain: #e9eaf2;
+  --paper: #f6f7f9;
+  --canvas: #ffffff;
+  --aubergine: #6d28d2;
+  --lavender-haze: #c0c4fc;
+  --ember: #c4710d;
+  --obsidian: #202230; /* sidfot, startsidans bild och mörka toningar */
+
+  /* Roller */
+  --bg-page: var(--porcelain);
+  --surface-card: var(--canvas);
+  --surface-subtle: var(--paper);
+  --surface-brand-soft: var(--lavender-haze);
+  --text-primary: var(--ink);
+  --text-secondary: var(--steel);
+  --text-disabled: var(--fog);
+  --text-on-action: var(--canvas);
+  --text-link: var(--aubergine);
+  --icon-brand: var(--aubergine);
+  --icon-accent: var(--ember);
+  --border-default: var(--chalk);
+  --border-strong: var(--mist);
+  --border-focus: var(--aubergine);
+  --border-input: var(--steel); /* fält, sökfält och valknappar: 6,6:1 mot vitt (minst 3:1 krävs) */
+  --action-primary: var(--aubergine);
+  --action-disabled: var(--chalk);
+  --action-selected: var(--ink);
+
+  /* Mått */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-full: 999px;
+  --shadow-floating: 0 4px 16px rgb(32 34 48 / 0.12);
+
+  /* Textroller: mobil först, större på dator (se @media nedan) */
+  --text-display: 2rem;      /* Mobil/Display H1 32 */
+  --text-h2: 1.5rem;         /* Mobil/Heading H2 24 */
+  --text-h3: 1.125rem;       /* Mobil/Heading H3 18 */
+  --text-body: 1rem;         /* Body 16 */
+  --text-caption: 0.875rem;  /* Delad/Caption 14 */
+  --text-label: 0.75rem;     /* Mobil/Label 12 */
+  --text-button: 0.875rem;   /* Mobil/Knapp 14 */
+
+  /* Namn som Storybook-stilguiden och WorkshopCard använder */
+  --color-page: var(--surface-subtle);
+  --color-surface: var(--surface-card);
+  --color-text: var(--text-primary);
+  --color-accent: var(--action-primary);
+  --color-line: var(--border-default);
+
   font-family: 'DM Sans Variable', system-ui, sans-serif;
-  color: var(--color-text);
-  background: var(--color-page);
+  font-optical-sizing: auto;
+  color: var(--text-primary);
+  background: var(--surface-subtle);
   font-size: 100%;
   line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (min-width: 960px) {
+  :root {
+    --text-display: 2.5rem;  /* Display/H1 40 */
+    --text-h2: 1.875rem;     /* Heading/H2 30 */
+    --text-h3: 1.25rem;      /* Heading/H3 20 */
+    --text-button: 1rem;     /* Label/Button 16 */
+  }
 }
 
 * { box-sizing: border-box; }
+html { scroll-padding-top: 88px; }
 body { margin: 0; font-size: var(--text-body); }
-.site { width: min(100% - 2rem, 58rem); margin: 0 auto; }
-nav { display: flex; gap: 1.5rem; border-bottom: 1px solid var(--color-line); }
-nav a { padding: 1rem 0; color: var(--color-accent); text-underline-offset: 0.25em; }
-nav [aria-current="page"] { font-weight: 700; }
-main { padding-block: 2.5rem; }
-h1 { font-size: var(--text-heading); line-height: 1.1; margin: 0 0 1.5rem; }
-h2 { font-size: var(--text-card-title); line-height: 1.25; margin: 0 0 0.75rem; }
-:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 3px; }
+img { max-width: 100%; display: block; }
+button, input, select { font: inherit; color: inherit; }
+a { color: var(--text-link); }
+:focus-visible { outline: 3px solid var(--border-focus); outline-offset: 2px; }
+
+h1, h2, h3 { margin: 0; color: var(--text-primary); overflow-wrap: anywhere; }
+h1 { font-size: var(--text-display); line-height: 1.2; letter-spacing: -0.01em; font-weight: 700; }
+h2 { font-size: var(--text-h2); line-height: 1.25; letter-spacing: -0.005em; font-weight: 700; }
+h3 { font-size: var(--text-h3); line-height: 1.3; font-weight: 500; }
+p { margin: 0; }
+
+.visually-hidden {
+  position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ---------- Delade byggstenar ---------- */
+
+.skip-link {
+  position: absolute; left: var(--space-16); top: -100px; z-index: 50;
+  padding: var(--space-8) var(--space-16); background: var(--surface-card); border-radius: var(--radius-sm);
+}
+.skip-link:focus { top: var(--space-8); }
+
+
+.caption { font-size: var(--text-caption); line-height: 1.4; color: var(--text-secondary); }
+.label {
+  font-size: var(--text-label); line-height: 1.4; font-weight: 500;
+  letter-spacing: 0.02em; text-transform: uppercase; color: var(--text-secondary);
+}
+
+.card {
+  background: var(--surface-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+}
+
+.divider { height: 1px; background: var(--border-default); border: 0; margin: 0; }
+
+/* Infrad: ikon 20 px i Aubergine + text */
+.info-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-12); }
+.info-row { display: flex; align-items: center; gap: var(--space-12); }
+.info-row svg { flex: none; color: var(--icon-brand); }
+
+/* Knappar */
+.button {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-8);
+  min-height: 44px; padding: 0 var(--space-24);
+  border: 0; border-radius: var(--radius-sm);
+  background: var(--action-primary); color: var(--text-on-action);
+  font-size: var(--text-button); font-weight: 500; line-height: 1;
+  text-decoration: none; cursor: pointer;
+}
+.button:hover { background: #5b1fb5; }
+.button--block { width: 100%; min-height: 52px; }
+.button:disabled, .button[aria-disabled='true'] {
+  background: var(--action-disabled); color: var(--text-secondary); cursor: not-allowed;
+}
+
+.text-link {
+  display: inline-flex; align-items: center; gap: var(--space-4);
+  color: var(--text-link); font-weight: 500; text-decoration: none;
+  background: none; border: 0; padding: 0; cursor: pointer;
+}
+.text-link:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+
+.icon-button {
+  display: inline-grid; place-items: center; width: 40px; height: 40px; flex: none;
+  border: 0; border-radius: var(--radius-sm); background: none; color: var(--text-primary);
+  cursor: pointer;
+}
+.icon-button:hover { background: var(--porcelain); }
+
+/* Statusbricka: Ember-kant, text i Ink */
+.status {
+  display: inline-flex; align-items: center; gap: 6px; height: 28px;
+  padding: 0 var(--space-12) 0 10px; white-space: nowrap;
+  border: 1px solid var(--icon-accent); border-radius: var(--radius-full);
+  background: var(--surface-card);
+  font-size: var(--text-caption); font-weight: 500; letter-spacing: 0.02em;
+}
+.status svg { color: var(--icon-accent); }
+
+/* Sökfält */
+.search-field {
+  display: flex; align-items: center; gap: var(--space-8);
+  height: 44px; padding: 0 var(--space-16);
+  background: var(--surface-card); border: 1px solid var(--border-input); border-radius: var(--radius-sm);
+}
+.search-field svg { flex: none; color: var(--text-secondary); }
+.search-field input { flex: 1; min-width: 0; border: 0; outline: 0; background: none; font-size: 1rem; }
+.search-field:focus-within { border-color: var(--border-focus); box-shadow: 0 0 0 1px var(--border-focus); }
+.search-field input::placeholder { color: var(--text-secondary); }
+
+/* Logomärke framför ordbilden LJUSRUM */
+.logomarke { flex: none; color: #7622da; }
+
+/* Webbläsarens eget töm-kryss döljs. Sokfalt.jsx har en egen knapp: 40 px klickyta, Steel, fokusring. */
+.search-field input::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
+.search-field { padding-right: var(--space-4); }
+.search-field input { padding-right: var(--space-8); }
+.search-field__tom {
+  display: inline-grid; place-items: center; flex: none; width: 36px; height: 36px; margin-block: -4px;
+  border: 0; border-radius: var(--radius-sm); background: none; color: var(--text-secondary); cursor: pointer;
+}
+.search-field__tom:hover { background: var(--porcelain); color: var(--text-primary); }
+.search-field__tom:focus-visible { outline-width: 2px; outline-offset: -2px; }
