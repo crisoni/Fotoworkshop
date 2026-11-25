@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate, useRouterState } from '@tanstack/react-router'
 import { Ikon } from './Ikon'
 import { Logomarke } from './Logomarke'
@@ -31,7 +31,7 @@ function Menyval({ val }) {
   return (
     <span className="adm-meny__val adm-meny__val--inaktiv" aria-disabled="true" title="Ingår inte i den här versionen">
       <Ikon namn={val.ikon} />
-      <span>{val.namn}</span>
+      <span>{val.namn}<span className="visually-hidden"> (ingår inte)</span></span>
     </span>
   )
 }
@@ -43,12 +43,25 @@ export function AdminLayout({ children }) {
   const [sok, setSok] = useState('')
   const navigate = useNavigate()
   const sokvag = useRouterState({ select: (s) => s.location.href })
+  const menyknapp = useRef(null)
+  const stangknapp = useRef(null)
+  const varOppen = useRef(false)
   useEffect(() => setMenyOppen(false), [sokvag])
+
+  // Mobilpanelen: fokus flyttas in när den öppnas och tillbaka till menyknappen när den stängs.
+  // Resten av sidan är inert medan panelen är öppen, så Tab stannar i panelen.
   useEffect(() => {
-    if (!menyOppen) return
-    const stang = (e) => e.key === 'Escape' && setMenyOppen(false)
-    window.addEventListener('keydown', stang)
-    return () => window.removeEventListener('keydown', stang)
+    if (menyOppen) {
+      varOppen.current = true
+      stangknapp.current?.focus()
+      const stang = (e) => e.key === 'Escape' && setMenyOppen(false)
+      window.addEventListener('keydown', stang)
+      return () => window.removeEventListener('keydown', stang)
+    }
+    if (varOppen.current) {
+      varOppen.current = false
+      menyknapp.current?.focus()
+    }
   }, [menyOppen])
 
   function sokAllt(e) {
@@ -58,13 +71,13 @@ export function AdminLayout({ children }) {
 
   return (
     <div className="adm">
-      <a className="skip-link" href="#adm-innehall">Hoppa till innehållet</a>
+      <a className="skip-link" href="#adm-innehall" tabIndex={menyOppen ? -1 : undefined}>Hoppa till innehållet</a>
 
-      <aside className="adm-sidomeny" data-oppen={menyOppen} aria-label="Adminmeny">
+      <aside id="adm-sidomeny" className="adm-sidomeny" data-oppen={menyOppen} aria-label="Adminmeny">
         <div className="adm-sidomeny__topp">
           <div className="adm-logo">
             <Link to="/admin" className="adm-logo__text"><Logomarke size={26} />LJUSRUM</Link>
-            <button type="button" className="icon-button adm-sidomeny__stang" onClick={() => setMenyOppen(false)}>
+            <button ref={stangknapp} type="button" className="icon-button adm-sidomeny__stang" onClick={() => setMenyOppen(false)}>
               <Ikon namn="stang" size={24} />
               <span className="visually-hidden">Stäng menyn</span>
             </button>
@@ -79,7 +92,7 @@ export function AdminLayout({ children }) {
       </aside>
       {menyOppen && <div className="adm-skugga" onClick={() => setMenyOppen(false)} aria-hidden="true" />}
 
-      <div className="adm-huvudyta">
+      <div className="adm-huvudyta" inert={menyOppen || undefined}>
         <header className="adm-topp">
           <Link to="/admin" className="adm-topp__logo"><Logomarke size={26} />LJUSRUM</Link>
           <form role="search" className="search-field adm-topp__sok" onSubmit={sokAllt}>
@@ -111,8 +124,10 @@ export function AdminLayout({ children }) {
             </div>
             <button
               type="button"
+              ref={menyknapp}
               className="icon-button adm-topp__meny"
               aria-expanded={menyOppen}
+              aria-controls="adm-sidomeny"
               onClick={() => setMenyOppen(true)}
             >
               <Ikon namn="meny" size={24} />

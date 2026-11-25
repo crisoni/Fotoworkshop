@@ -51,7 +51,7 @@
 
 /* ---------- Innehåll ---------- */
 .adm-innehall { flex: 1; }
-.adm-sida { display: grid; gap: var(--space-24); padding: var(--space-32) var(--space-40) var(--space-40); max-width: 1320px; }
+.adm-sida { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-24); padding: var(--space-32) var(--space-40) var(--space-40); max-width: 1320px; }
 .adm-sidhuvud { display: grid; gap: var(--space-12); }
 .adm-sidhuvud--rad { display: flex; align-items: center; justify-content: space-between; gap: var(--space-16); flex-wrap: wrap; }
 .adm-sidhuvud__titel { display: grid; gap: var(--space-4); }
@@ -100,7 +100,7 @@
 .adm-tomt { padding: var(--space-32); text-align: center; color: var(--text-secondary); background: var(--surface-card); border: 1px dashed var(--border-strong); border-radius: var(--radius-md); }
 
 /* ---------- Tabeller ---------- */
-.adm-tabell-ram { background: var(--surface-card); border: 1px solid var(--border-default); border-radius: var(--radius-md); overflow: hidden; }
+.adm-tabell-ram { background: var(--surface-card); border: 1px solid var(--border-default); border-radius: var(--radius-md); overflow-x: auto; min-width: 0; position: relative; }
 .adm-tabell { width: 100%; border-collapse: collapse; }
 .adm-tabell th {
   height: 48px; padding: 0 var(--space-16); text-align: left; white-space: nowrap;
@@ -116,7 +116,7 @@
 .adm-cell--epost { overflow-wrap: anywhere; }
 .adm-cell--atgarder { text-align: right; white-space: nowrap; }
 .adm-cell--atgarder > * { vertical-align: middle; }
-.adm-cell--atgarder .text-link { margin-right: var(--space-8); }
+.adm-cell--atgarder .text-link { margin-right: var(--space-8); padding-block: 10px; margin-block: -10px; }
 .adm-cell--atgarder .icon-button { color: var(--text-primary); }
 .adm-tabell .adm-cell--nr { font-weight: 400; }
 .adm-tabell--tillfallen td:first-child { width: 30%; }
@@ -145,10 +145,12 @@
 @media (max-width: 1023px) {
   .adm-sidomeny {
     position: fixed; z-index: 40; left: 0; top: 0; bottom: 0;
-    transform: translateX(-100%); transition: transform 0.2s ease;
+    transform: translateX(-100%); visibility: hidden;
+    transition: transform 0.2s ease, visibility 0s linear 0.2s;
     box-shadow: var(--shadow-floating);
   }
-  .adm-sidomeny[data-oppen='true'] { transform: none; }
+  /* Stängd panel är dold även för tangentbord och skärmläsare */
+  .adm-sidomeny[data-oppen='true'] { transform: none; visibility: visible; transition: transform 0.2s ease; }
   .adm-sidomeny__stang { display: inline-grid; }
   .adm-skugga { position: fixed; inset: 0; z-index: 30; background: rgb(32 34 48 / 0.4); }
   .adm-topp { padding: 0 var(--space-24); height: 64px; }
@@ -156,7 +158,7 @@
   .adm-topp__meny { display: inline-grid; }
   .adm-sida { padding: var(--space-24); }
 }
-@media (prefers-reduced-motion: reduce) { .adm-sidomeny { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .adm-sidomeny, .adm-sidomeny[data-oppen='true'] { transition: none; } }
 
 @media (max-width: 767px) {
   .adm-topp__sok, .adm-topp__ikon, .adm-topp__avdelare, .adm-anvandare__namn, .adm-anvandare__pil { display: none; }
