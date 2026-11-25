@@ -6,12 +6,7 @@
 .workshop__innehall { display: grid; gap: 0; min-width: 0; }
 .workshop__innehall > .workshop-card { padding-bottom: 28px; }
 .workshop__avsnitt { display: grid; gap: var(--space-12); padding-block: 28px; }
-.workshop .viktig-info { margin-top: var(--space-12); }
 
-.viktig-info { display: grid; gap: var(--space-12); padding: var(--space-24) 20px; border-color: var(--border-strong); }
-.viktig-info__lista { margin: 0; }
-.viktig-info__lista dt { display: inline; font-weight: 500; }
-.viktig-info__lista dd { display: inline; margin: 0; }
 
 /* Prisrad: flytande kort i nederkant på mobil (16 px från kanterna, delvis genomskinligt),
    bokningskort till höger som följer med vid scroll på dator. */
@@ -193,3 +188,24 @@
   .tillfalle-rad:disabled .tillfalle-rad__datum { color: var(--text-secondary); text-decoration: line-through; }
   .tillfalle-rad__datum { font-weight: 500; }
 }
+
+/* ---------- Inför dagen ---------- */
+.infor-dagen { display: grid; gap: var(--space-24); }
+.infor-dagen__varning {
+  display: flex; gap: var(--space-12); align-items: flex-start;
+  padding: var(--space-16); border-radius: var(--radius-md);
+  background: #fdf3e7; border: 1px solid var(--ember);
+}
+.infor-dagen__varning svg { flex: none; color: var(--ember); margin-top: 1px; }
+.infor-dagen__varning strong { font-weight: 500; }
+.infor-dagen__grupp { display: grid; gap: var(--space-12); }
+.infor-dagen__lista { list-style: none; margin: 0; padding: 0; display: grid; }
+.infor-dagen__lista li { display: flex; gap: var(--space-12); align-items: center; padding: var(--space-12) 0; border-bottom: 1px solid var(--border-default); }
+.infor-dagen__lista li:first-child { padding-top: 0; }
+.infor-dagen__lista svg { flex: none; color: #2e7d4f; }
+.infor-dagen__brickor { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-8); }
+.infor-dagen__brickor li {
+  display: inline-flex; align-items: center; height: 32px; padding: 0 var(--space-12);
+  border-radius: var(--radius-full); background: var(--porcelain); font-size: var(--text-caption); font-weight: 500;
+}
+.infor-dagen__brickor .infor-dagen__bricka--inte { background: none; border: 1px dashed var(--fog); color: var(--text-secondary); font-weight: 400; }

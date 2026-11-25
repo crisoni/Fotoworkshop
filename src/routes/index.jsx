@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
 import { WorkshopCard } from '../components/WorkshopCard'
 import { Webbplats } from '../components/Webbplats'
-import { ViktigInfo } from '../components/ViktigInfo'
+import { InforDagen } from '../components/InforDagen'
 import { Dela } from '../components/Dela'
 import { workshop, formatPris, tillfallen } from '../data'
 import { useBokning, platserKvar, platserText } from '../bokningar'
@@ -58,10 +58,11 @@ function Workshopsida() {
             <p>{workshop.forkunskaper}</p>
           </section>
 
-          <section className="card viktig-info" aria-labelledby="viktigt">
-            <h2 id="viktigt" className="boka__underrubrik">Viktig information</h2>
-            <ViktigInfo />
-          </section>
+          <hr className="divider" />
+
+          <div className="workshop__avsnitt">
+            <InforDagen />
+          </div>
         </div>
 
         <aside className="prisrad" aria-label="Pris och bokning">

@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { createFileRoute, Link, Navigate } from '@tanstack/react-router'
 import { Webbplats } from '../components/Webbplats'
 import { Ikon } from '../components/Ikon'
-import { ViktigInfo } from '../components/ViktigInfo'
+import { InforDagen } from '../components/InforDagen'
 import { useBokning } from '../bokningar'
 import { workshop, tillfalleMedId, formatPris, kartlank } from '../data'
 import { laddaNerKalenderfil, googleKalenderlank } from '../kalenderfil'
@@ -64,10 +64,7 @@ function Bekraftelse() {
 
         <hr className="divider" />
 
-        <section className="card viktig-info" aria-labelledby="viktigt">
-          <h2 id="viktigt" className="boka__underrubrik">Viktig information</h2>
-          <ViktigInfo lang />
-        </section>
+        <InforDagen rubrikKlass="boka__underrubrik" />
 
         <p className="bekraftelse__tillbaka"><Link to="/" className="text-link">Till workshopsidan</Link></p>
       </div>

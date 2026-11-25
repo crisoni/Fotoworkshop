@@ -15,8 +15,14 @@ export const workshop = {
     'Ta kontroll över din kamera är en workshop för vuxna nybörjare som vill komma vidare från autoläget. Dagen innehåller korta genomgångar och praktiska fotoövningar, både inne och ute.',
   merOm:
     'Deltagarna får öva på bländare, slutartid, ISO, fokus, ljus och komposition. Inga tidigare fotokunskaper behövs.',
-  forkunskaper:
-    'Inga tidigare fotokunskaper behövs. Du behöver en egen kamera där du kan ställa in bländare, slutartid och ISO. Mobilkamera räcker inte. Extra objektiv och stativ behövs inte.',
+  forkunskaper: 'Inga tidigare fotokunskaper behövs.',
+  // Visas som varning i "Inför dagen" och som infrad överst på workshopsidan
+  kameraKrav: 'Du behöver en egen kamera där du kan ställa in bländare, slutartid och ISO. Mobilkamera räcker inte.',
+  // Checklista och vad som ingår, i "Inför dagen"
+  checklista: ['Laddat batteri', 'Minneskort', 'Kläder efter väder, vi är ute en del av dagen'],
+  ingarLista: ['Handledning', 'Övningsmaterial', 'Fika'],
+  ingarInte: 'Lunch',
+  behovsInte: 'Extra objektiv och stativ behövs inte.',
   ingar: 'Handledning, övningsmaterial och fika. Lunch ingår inte.',
   taMedKort: 'Egen kamera, laddat batteri och minneskort.',
   taMed:

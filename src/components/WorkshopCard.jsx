@@ -9,6 +9,7 @@ export function WorkshopCard({
   date = 'Lördagar 14, 21 och 28 november 2026',
   time = 'Kl 10:00–15:00',
   place = 'Södermalm & utomhus i närheten',
+  requirement = 'Egen kamera krävs',
   rating = '4,9/5',
   reviews = 32,
   image = '/bilder/kamera.jpg',
@@ -40,6 +41,7 @@ export function WorkshopCard({
           <li className="info-row"><Ikon namn="kalender" /><span>{date}</span></li>
           <li className="info-row"><Ikon namn="klocka" /><span>{time}</span></li>
           <li className="info-row"><Ikon namn="plats" /><span>{place}</span></li>
+          {requirement && <li className="info-row"><Ikon namn="kamera" /><span>{requirement}</span></li>}
         </ul>
       </div>
     </article>
