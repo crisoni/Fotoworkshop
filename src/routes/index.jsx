@@ -80,7 +80,7 @@ function Startsida() {
             <Link to={workshopSokvag} className="ws-kort">
               <img src="/bilder/kamera.jpg" alt="" loading="lazy" />
               <span className="ws-kort__text">
-                <span className="ws-kort__titel">{workshop.titel}</span>
+                <h3 className="ws-kort__titel">{workshop.titel}</h3>
                 <span className="caption">Nybörjare · {formatPris(workshop.pris)}</span>
                 <span className="ws-kort__bricka ws-kort__bricka--bokbar">{tillfallen.length} datum i november</span>
               </span>

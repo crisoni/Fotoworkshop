@@ -7,17 +7,18 @@
   /* Mobil: fotot överst och texten på mörk botten under, så att rubriken inte ligger över kameran */
   padding: min(62vw, 320px) var(--space-24) var(--space-32);
   color: var(--canvas);
-  background: #202230 url('/bilder/kamera.jpg') center top / 100% auto no-repeat;
+  background: var(--obsidian) url('/bilder/kamera.jpg') center top / 100% auto no-repeat;
 }
 /* Toning: fotot tonar över i mörkt där texten börjar */
 .start-hero::before {
   content: ''; position: absolute; inset: 0; z-index: -1;
-  background: linear-gradient(180deg, rgb(32 34 48 / 0.1) 0, rgb(32 34 48 / 0.35) min(30vw, 160px), #202230 min(66vw, 340px));
+  background: linear-gradient(180deg, color-mix(in srgb, var(--obsidian) 10%, transparent) 0, color-mix(in srgb, var(--obsidian) 35%, transparent) min(30vw, 160px), var(--obsidian) min(66vw, 340px));
 }
 .start-hero__text { display: grid; gap: var(--space-16); max-width: 36rem; }
 .start-hero__over {
   font-size: var(--text-label); font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--lavender-haze);
+  /* Ljusare Lavender, så att texten klarar 4,5:1 även över kamerans ljusa partier */
+  color: color-mix(in srgb, var(--lavender-haze) 55%, white);
 }
 .start-hero h1 {
   color: var(--canvas); font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.04; letter-spacing: -0.02em;
@@ -50,18 +51,18 @@
   width: 100%; display: grid; gap: 2px;
   text-align: left; cursor: pointer;
   padding: var(--space-12) var(--space-16); border-radius: var(--radius-md);
-  color: var(--canvas); background: rgb(32 34 48 / 0.55); border: 1px solid rgb(255 255 255 / 0.28);
+  color: var(--canvas); background: color-mix(in srgb, var(--obsidian) 72%, transparent); border: 1px solid rgb(255 255 255 / 0.28);
   -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
   transition: background 0.2s, transform 0.2s;
 }
-.start-kort:hover { background: rgb(32 34 48 / 0.75); border-color: rgb(255 255 255 / 0.5); }
+.start-kort:hover { background: color-mix(in srgb, var(--obsidian) 85%, transparent); border-color: rgb(255 255 255 / 0.5); }
 .start-kort:disabled { cursor: default; opacity: 0.6; }
 .start-kort__datum { font-weight: 500; }
-.start-kort__platser { font-size: var(--text-caption); color: rgb(255 255 255 / 0.8); }
+.start-kort__platser { font-size: var(--text-caption); color: var(--chalk); }
 
 @media (min-width: 960px) {
   .start-hero {
-    background: #202230 url('/bilder/kamera.jpg') 62% center / cover no-repeat;
+    background: var(--obsidian) url('/bilder/kamera.jpg') 62% center / cover no-repeat;
     /* Bilden går kant i kant. Innehållet följer samma 1200 px-spalt som sektionerna under,
        så att rubriken, korten och "Workshoppar" börjar och slutar på samma linjer. */
     min-height: min(calc(100svh - 64px), 720px);
@@ -70,8 +71,9 @@
   }
   .start-hero::before {
     background:
-      linear-gradient(90deg, rgb(32 34 48 / 0.88) 0%, rgb(32 34 48 / 0.55) 45%, rgb(32 34 48 / 0.1) 75%),
-      linear-gradient(0deg, rgb(32 34 48 / 0.6) 0%, rgb(32 34 48 / 0) 50%);
+      linear-gradient(90deg, color-mix(in srgb, var(--obsidian) 88%, transparent) 0%, color-mix(in srgb, var(--obsidian) 55%, transparent) 45%, color-mix(in srgb, var(--obsidian) 10%, transparent) 75%),
+      linear-gradient(0deg, color-mix(in srgb, var(--obsidian) 60%, transparent) 0%, transparent 50%),
+      linear-gradient(180deg, color-mix(in srgb, var(--obsidian) 45%, transparent) 0%, transparent 55%);
   }
   .start-hero__text { gap: var(--space-24); }
   .start-tillfallen { align-self: center; }

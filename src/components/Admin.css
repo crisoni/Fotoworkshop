@@ -154,7 +154,7 @@
   /* Stängd panel är dold även för tangentbord och skärmläsare */
   .adm-sidomeny[data-oppen='true'] { transform: none; visibility: visible; transition: transform 0.2s ease; }
   .adm-sidomeny__stang { display: inline-grid; }
-  .adm-skugga { position: fixed; inset: 0; z-index: 30; background: rgb(32 34 48 / 0.4); }
+  .adm-skugga { position: fixed; inset: 0; z-index: 30; background: color-mix(in srgb, var(--obsidian) 40%, transparent); }
   .adm-topp { padding: 0 var(--space-24); height: 64px; }
   .adm-topp__logo { display: inline-flex; font-size: 1.125rem; }
   .adm-topp__meny { display: inline-grid; }
