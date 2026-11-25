@@ -62,7 +62,7 @@
 
 @media (min-width: 960px) {
   .start-hero {
-    background: var(--obsidian) url('/bilder/kamera.jpg') 62% center / cover no-repeat;
+    background: var(--obsidian) url('/bilder/kamera-2400.jpg') 62% 22% / cover no-repeat;
     /* Bilden går kant i kant. Innehållet följer samma 1200 px-spalt som sektionerna under,
        så att rubriken, korten och "Workshoppar" börjar och slutar på samma linjer. */
     min-height: min(calc(100svh - 64px), 720px);
