@@ -50,7 +50,7 @@ function Workshopsida() {
           </section>
 
           <section className="card viktig-info" aria-labelledby="viktigt">
-            <h2 id="viktigt">Viktig information</h2>
+            <h2 id="viktigt" className="boka__underrubrik">Viktig information</h2>
             <ViktigInfo />
           </section>
         </div>

@@ -86,7 +86,7 @@ function Tillfallen() {
                 </td>
                 <td data-label="Datum" className="adm-cell--datum">
                   <span className="adm-stark">{t.lang}</span>
-                  <span className="caption">kl {workshop.tid}</span>
+                  <span className="caption">Kl {workshop.tid}</span>
                 </td>
                 <td data-label="Anmälda">{antal} av {workshop.maxDeltagare}</td>
                 <td data-label="Pris">{formatPris(workshop.pris)}</td>
@@ -172,7 +172,7 @@ function AllaDeltagare() {
                 <td data-label="E-post" className="adm-cell--epost">{b.epost}</td>
                 <td data-label="Tillfälle">
                   <span className="adm-stark">{t.lang}</span>
-                  <span className="caption">kl {workshop.tid}</span>
+                  <span className="caption">Kl {workshop.tid}</span>
                 </td>
                 <td data-label="Betalning">På plats</td>
                 <td data-label="Status"><Statusbricka /></td>
