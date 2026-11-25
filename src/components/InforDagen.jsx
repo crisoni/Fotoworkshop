@@ -30,7 +30,7 @@ export function InforDagen({ rubrikId = 'infor-dagen', rubrikKlass }) {
           {workshop.ingarLista.map(([sak, ikon]) => (
             <li key={sak}><Ikon namn={ikon} size={22} />{sak}</li>
           ))}
-          <li className="infor-dagen__ingar--inte"><Ikon namn="bestick" size={22} />Ingen {workshop.ingarInte.toLowerCase()}</li>
+          <li className="infor-dagen__ingar--inte"><Ikon namn="bestick" size={22} />{workshop.ingarInte} ingår inte</li>
         </ul>
       </div>
     </section>
