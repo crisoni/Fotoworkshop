@@ -8,7 +8,7 @@ export function Dela({ titel }) {
   const dialog = useRef(null)
   const falt = useRef(null)
   const [kopierad, setKopierad] = useState(false)
-  const url = typeof window === 'undefined' ? '' : window.location.origin + '/'
+  const url = typeof window === 'undefined' ? '' : window.location.origin + window.location.pathname
 
   function oppna() {
     setKopierad(false)

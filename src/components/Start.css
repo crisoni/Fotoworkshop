@@ -1,0 +1,115 @@
+/* Startsidan. Hero med fotot i rundad ram (kant i kant på mobil), text i vitt över en mörk toning,
+   tillfällena som glaskort. Inspiration: kursida med stor naturbild och glaskort till höger. */
+
+.start-hero {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: grid; align-items: end; gap: var(--space-32);
+  /* Mobil: fotot överst och texten på mörk botten under, så att rubriken inte ligger över kameran */
+  padding: min(62vw, 320px) var(--space-24) var(--space-32);
+  color: var(--canvas);
+  background: #202230 url('/bilder/kamera.jpg') center top / 100% auto no-repeat;
+}
+/* Toning: fotot tonar över i mörkt där texten börjar */
+.start-hero::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(180deg, rgb(32 34 48 / 0.1) 0, rgb(32 34 48 / 0.35) min(30vw, 160px), #202230 min(66vw, 340px));
+}
+.start-hero__text { display: grid; gap: var(--space-16); max-width: 36rem; }
+.start-hero__over {
+  font-size: var(--text-label); font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--lavender-haze);
+}
+.start-hero h1 {
+  color: var(--canvas); font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.04; letter-spacing: -0.02em;
+  max-width: 11ch;
+}
+.start-hero__ingress { font-size: 1.0625rem; line-height: 1.6; color: rgb(255 255 255 / 0.88); max-width: 30rem; }
+.start-hero__knappar { display: flex; flex-wrap: wrap; gap: var(--space-12); padding-top: var(--space-8); }
+.start-knapp { min-height: 52px; padding: 0 var(--space-24); }
+@media (max-width: 599px) {
+  .start-hero__knappar { display: grid; }
+  .start-knapp { width: 100%; }
+}
+.start-knapp svg { flex: none; }
+.start-knapp--ljus { background: var(--canvas); color: var(--text-primary); }
+.start-knapp--ljus:hover { background: var(--porcelain); }
+.start-knapp--ljus svg { color: var(--icon-brand); }
+.start-knapp--glas {
+  background: rgb(255 255 255 / 0.14); color: var(--canvas); border: 1px solid rgb(255 255 255 / 0.35);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+}
+.start-knapp--glas:hover { background: rgb(255 255 255 / 0.24); }
+.start-hero :focus-visible { outline-color: var(--lavender-haze); }
+.start-hero__fakta { display: flex; flex-wrap: wrap; gap: var(--space-4) var(--space-16); font-size: var(--text-caption); color: rgb(255 255 255 / 0.8); }
+.start-hero__fakta span + span::before { content: ''; display: inline-block; width: 4px; height: 4px; border-radius: 50%; background: currentColor; margin: 0 var(--space-16) 3px 0; opacity: 0.7; }
+
+/* Tillfällen: mobil = lista under texten, dator = glaskort i en kolumn till höger */
+.start-tillfallen ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-8); }
+.start-kort {
+  width: 100%; display: grid; grid-template-columns: 4.25rem 1fr; grid-template-rows: auto auto; column-gap: var(--space-12);
+  align-items: center; text-align: left; cursor: pointer;
+  padding: var(--space-12) var(--space-16); border-radius: var(--radius-md);
+  color: var(--canvas); background: rgb(255 255 255 / 0.12); border: 1px solid rgb(255 255 255 / 0.28);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  transition: background 0.2s, transform 0.2s;
+}
+.start-kort:hover { background: rgb(255 255 255 / 0.22); }
+.start-kort:disabled { cursor: default; opacity: 0.6; }
+.start-kort__nr { grid-row: 1 / 3; font-size: 1.5rem; font-weight: 500; line-height: 1; }
+.start-kort__nr span { font-size: var(--text-caption); color: rgb(255 255 255 / 0.7); margin-left: 2px; }
+.start-kort__datum { font-weight: 500; }
+.start-kort__platser { font-size: var(--text-caption); color: rgb(255 255 255 / 0.8); }
+
+@media (min-width: 960px) {
+  .start-hero {
+    background: #202230 url('/bilder/kamera.jpg') 62% center / cover no-repeat;
+    margin: var(--space-24) auto 0; width: min(100% - 2 * var(--space-24), 1392px);
+    border-radius: 24px; min-height: min(calc(100svh - 112px), 720px);
+    grid-template-columns: minmax(0, 1fr) 248px; align-items: end; gap: 48px;
+    padding: 72px 64px 64px;
+  }
+  .start-hero::before {
+    background:
+      linear-gradient(90deg, rgb(32 34 48 / 0.88) 0%, rgb(32 34 48 / 0.55) 45%, rgb(32 34 48 / 0.1) 75%),
+      linear-gradient(0deg, rgb(32 34 48 / 0.6) 0%, rgb(32 34 48 / 0) 50%);
+  }
+  .start-hero__text { gap: var(--space-24); }
+  .start-tillfallen { align-self: center; }
+  .start-tillfallen ul { gap: var(--space-16); }
+  .start-kort {
+    grid-template-columns: 1fr; grid-template-rows: auto; row-gap: var(--space-4);
+    padding: var(--space-24); min-height: 150px; align-content: space-between;
+  }
+  .start-kort:hover { transform: translateY(-2px); }
+  .start-kort__nr { grid-row: auto; font-size: 1.75rem; margin-bottom: var(--space-16); }
+  .start-kort__datum { font-size: var(--text-h3); line-height: 1.25; }
+}
+
+/* Mjuk entré: texten och korten glider upp en gång när sidan laddas */
+@media (prefers-reduced-motion: no-preference) {
+  .start-hero__text > *, .start-tillfallen li { animation: start-in 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+  .start-hero__text > :nth-child(2) { animation-delay: 0.06s; }
+  .start-hero__text > :nth-child(3) { animation-delay: 0.12s; }
+  .start-hero__text > :nth-child(4) { animation-delay: 0.18s; }
+  .start-hero__text > :nth-child(5) { animation-delay: 0.24s; }
+  .start-tillfallen li:nth-child(1) { animation-delay: 0.3s; }
+  .start-tillfallen li:nth-child(2) { animation-delay: 0.38s; }
+  .start-tillfallen li:nth-child(3) { animation-delay: 0.46s; }
+}
+@keyframes start-in { from { opacity: 0; transform: translateY(16px); } }
+
+/* Därför Ljusrum */
+.start-varfor {
+  width: min(100% - 2 * var(--space-24), 1200px); margin-inline: auto;
+  padding-block: 56px 72px; display: grid; gap: var(--space-32); justify-items: start;
+}
+.start-varfor ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-32); width: 100%; }
+.start-varfor li { display: grid; gap: var(--space-8); align-content: start; }
+.start-varfor li svg { color: var(--icon-brand); margin-bottom: var(--space-8); }
+.start-varfor p { color: var(--text-secondary); max-width: 32ch; }
+@media (min-width: 768px) {
+  .start-varfor ul { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px; }
+}
+@media (min-width: 960px) {
+  .start-varfor { padding-block: 80px 96px; }
+}

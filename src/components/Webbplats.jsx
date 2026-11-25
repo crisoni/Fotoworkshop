@@ -3,6 +3,7 @@ import { Link, useRouterState } from '@tanstack/react-router'
 import { Ikon } from './Ikon'
 import { Logomarke } from './Logomarke'
 import { siFacebook, siInstagram } from './varumarken'
+import { workshopSokvag } from '../data'
 import './Webbplats.css'
 
 const villkor = [
@@ -70,7 +71,7 @@ export function Webbplats({ children, medPrisrad = false }) {
           </button>
           <nav id="huvudmeny" aria-label="Huvudmeny" className="webb-nav" data-oppen={oppen}>
             <div className="webb-nav__lankar">
-              <Link to="/" activeOptions={{ exact: true }} onClick={() => setOppen(false)}>Workshoppar</Link>
+              <Link to={workshopSokvag} onClick={() => setOppen(false)}>Workshoppar</Link>
               {/* Galleri och Priser är med för att menyn ska se ut som en riktig webbplats. Sidorna finns inte än. */}
               <a href="#galleri" onClick={(e) => e.preventDefault()}>Galleri</a>
               <a href="#priser" onClick={(e) => e.preventDefault()}>Priser</a>
@@ -97,7 +98,7 @@ export function Webbplats({ children, medPrisrad = false }) {
             <nav className="webb-fot__kolumn" aria-labelledby="fot-workshoppar">
               <h2 id="fot-workshoppar" className="webb-fot__rubrik">Workshoppar</h2>
               <ul>
-                <li><Link to="/">Ta kontroll över din kamera</Link></li>
+                <li><Link to={workshopSokvag}>Ta kontroll över din kamera</Link></li>
                 <li><Link to="/boka">Boka en plats</Link></li>
               </ul>
             </nav>

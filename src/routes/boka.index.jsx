@@ -4,7 +4,7 @@ import { Webbplats } from '../components/Webbplats'
 import { Kalender } from '../components/Kalender'
 import { Ikon } from '../components/Ikon'
 import { useBokning, giltigEpost, utkastKlart, platserKvar, platserText } from '../bokningar'
-import { workshop } from '../data'
+import { workshop, workshopSokvag } from '../data'
 import '../components/Deltagare.css'
 
 export const Route = createFileRoute('/boka/')({
@@ -45,7 +45,7 @@ function Boka() {
       <form className="sida boka" onSubmit={fortsatt} noValidate>
         <div className="sidrubrik boka__rubrik">
           <div className="sidrubrik__rad">
-            <Link to="/" className="tillbaka" aria-label="Tillbaka till workshopsidan">
+            <Link to={workshopSokvag} className="tillbaka" aria-label="Tillbaka till workshopsidan">
               <Ikon namn="pil-vanster" size={24} />
             </Link>
             <h1>Boka workshop</h1>

@@ -1,95 +1,94 @@
-import { useState } from 'react'
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
-import { WorkshopCard } from '../components/WorkshopCard'
 import { Webbplats } from '../components/Webbplats'
-import { InforDagen } from '../components/InforDagen'
-import { Dela } from '../components/Dela'
-import { workshop, formatPris, tillfallen } from '../data'
+import { Ikon } from '../components/Ikon'
 import { useBokning, platserKvar, platserText } from '../bokningar'
-import '../components/Deltagare.css'
+import { workshop, tillfallen, formatPris, workshopSokvag } from '../data'
+import '../components/Start.css'
 
 export const Route = createFileRoute('/')({
-  component: Workshopsida,
+  component: Startsida,
 })
 
-// Workshopsidan: "Framsida – efter test" (mobil) och "D01 Workshopsida – dator".
-// Mobil: en kolumn och en flytande prisrad i nederkant.
-// Dator: innehållet till vänster och ett bokningskort till höger som följer med vid scroll.
-function Workshopsida() {
-  const [visaMer, setVisaMer] = useState(false)
+// Startsidan. Stor bild med workshoppen till vänster och de tre tillfällena som kort till höger
+// (inspirerat av en kursida med glaskort). Ett kort väljer datumet och går direkt till bokningen.
+// Mobil: bilden överst, korten i en lista under.
+function Startsida() {
   const { alla, uppdatera } = useBokning()
   const navigate = useNavigate()
+  const totalt = String(tillfallen.length).padStart(2, '0')
 
-  // Ett tillfälle i priskortet väljer datumet direkt och går till bokningen
-  function valjTillfalle(id) {
+  function valj(id) {
     uppdatera({ tillfalle: id })
     navigate({ to: '/boka' })
   }
 
   return (
-    <Webbplats medPrisrad>
-      <div className="sida workshop">
-        <div className="workshop__innehall">
-          <WorkshopCard titelTillagg={<Dela titel={workshop.titel} />} />
-
-          <hr className="divider" />
-
-          <section className="workshop__avsnitt" aria-labelledby="om">
-            <h2 id="om">Om workshoppen</h2>
-            <p>
-              {workshop.kortOm}{' '}
-              {visaMer && <span id="mer-om">{workshop.merOm} </span>}
-              <button
-                type="button"
-                className="text-link"
-                aria-expanded={visaMer}
-                aria-controls="mer-om"
-                onClick={() => setVisaMer((v) => !v)}
-              >
-                {visaMer ? 'Visa mindre' : 'Läs mer'}
-              </button>
-            </p>
-          </section>
-
-          <hr className="divider" />
-
-          <section className="workshop__avsnitt" aria-labelledby="forkunskaper">
-            <h2 id="forkunskaper">Förkunskaper</h2>
-            <p>{workshop.forkunskaper}</p>
-          </section>
-
-          <hr className="divider" />
-
-          <div className="workshop__avsnitt">
-            <InforDagen />
+    <Webbplats>
+      <section className="start-hero" aria-labelledby="start-rubrik">
+        <div className="start-hero__text">
+          <p className="start-hero__over">Fotoworkshop · Lördagar i november</p>
+          <h1 id="start-rubrik">{workshop.titel}</h1>
+          <p className="start-hero__ingress">
+            En dag för vuxna nybörjare som vill komma vidare från autoläget. Korta genomgångar och mycket övning, i studion och ute på Södermalm.
+          </p>
+          <div className="start-hero__knappar">
+            <Link to="/boka" className="button start-knapp start-knapp--ljus">
+              <Ikon namn="kalender" />Välj datum
+            </Link>
+            <Link to={workshopSokvag} className="button start-knapp start-knapp--glas">
+              Om workshoppen<Ikon namn="vinkel-hoger" />
+            </Link>
           </div>
+          <p className="start-hero__fakta">
+            <span>Kl {workshop.tid}</span>
+            <span>{formatPris(workshop.pris)}</span>
+            <span>Högst {workshop.maxDeltagare} deltagare</span>
+          </p>
         </div>
 
-        <aside className="prisrad" aria-label="Pris och bokning">
-          <div className="prisrad__pris">
-            <span className="caption">Pris per person</span>
-            <span className="prisrad__belopp">{formatPris(workshop.pris)}</span>
-          </div>
-          <Link to="/boka" className="button prisrad__knapp">Boka</Link>
-          {/* Bara på dator: tillfällen med lediga platser */}
-          <div className="prisrad__tillfallen">
-            <h2 className="label" id="tillfallen-rubrik">Tillfällen</h2>
-            <ul aria-labelledby="tillfallen-rubrik">
-              {tillfallen.map((t) => {
-                const kvar = platserKvar(alla, t.id)
-                return (
-                  <li key={t.id}>
-                    <button type="button" className="tillfalle-rad" disabled={kvar === 0} onClick={() => valjTillfalle(t.id)}>
-                      <span className="tillfalle-rad__datum">{t.lang}</span>
-                      <span className={kvar <= 3 ? 'platser platser--fa' : 'platser'}>{platserText(kvar)}</span>
-                    </button>
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
-        </aside>
-      </div>
+        <div className="start-tillfallen">
+          <h2 className="visually-hidden" id="start-tillfallen">Tillfällen</h2>
+          <ul aria-labelledby="start-tillfallen">
+            {tillfallen.map((t, i) => {
+              const kvar = platserKvar(alla, t.id)
+              return (
+                <li key={t.id}>
+                  <button type="button" className="start-kort" disabled={kvar === 0} onClick={() => valj(t.id)}>
+                    <span className="start-kort__nr" aria-hidden="true">
+                      {String(i + 1).padStart(2, '0')}<span>/{totalt}</span>
+                    </span>
+                    <span className="start-kort__datum">{t.lang}</span>
+                    <span className="start-kort__platser">{platserText(kvar)}</span>
+                    <span className="visually-hidden">, välj och boka</span>
+                  </button>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+      </section>
+
+      <section className="start-varfor" aria-labelledby="varfor-rubrik">
+        <h2 id="varfor-rubrik">Därför Ljusrum</h2>
+        <ul>
+          <li>
+            <Ikon namn="anvandare" size={28} />
+            <h3>Små grupper</h3>
+            <p>Högst {workshop.maxDeltagare} deltagare, så det finns tid för just dina frågor.</p>
+          </li>
+          <li>
+            <Ikon namn="plats" size={28} />
+            <h3>Inne och ute</h3>
+            <p>Genomgångar i studion på Södermalm och övningar i ljuset utanför.</p>
+          </li>
+          <li>
+            <Ikon namn="kamera" size={28} />
+            <h3>Bort från autoläget</h3>
+            <p>Bländare, slutartid, ISO, fokus, ljus och komposition. Inga förkunskaper behövs.</p>
+          </li>
+        </ul>
+        <Link to={workshopSokvag} className="text-link">Läs allt om workshoppen<Ikon namn="vinkel-hoger" /></Link>
+      </section>
     </Webbplats>
   )
 }

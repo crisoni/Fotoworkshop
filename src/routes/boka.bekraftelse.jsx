@@ -4,7 +4,7 @@ import { Webbplats } from '../components/Webbplats'
 import { Ikon } from '../components/Ikon'
 import { InforDagen } from '../components/InforDagen'
 import { useBokning } from '../bokningar'
-import { workshop, tillfalleMedId, formatPris, kartlank } from '../data'
+import { workshop, tillfalleMedId, formatPris, kartlank, workshopSokvag } from '../data'
 import { laddaNerKalenderfil, googleKalenderlank } from '../kalenderfil'
 import '../components/Deltagare.css'
 
@@ -66,7 +66,7 @@ function Bekraftelse() {
 
         <InforDagen rubrikKlass="boka__underrubrik" />
 
-        <p className="bekraftelse__tillbaka"><Link to="/" className="text-link">Till workshopsidan</Link></p>
+        <p className="bekraftelse__tillbaka"><Link to={workshopSokvag} className="text-link">Till workshopsidan</Link></p>
       </div>
     </Webbplats>
   )

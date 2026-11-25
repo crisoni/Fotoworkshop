@@ -23,7 +23,7 @@ function SidanFinnsInte() {
     <main style={{ padding: '4rem 1.5rem', maxWidth: '40rem', margin: '0 auto', display: 'grid', gap: '1rem' }}>
       <h1>Sidan finns inte</h1>
       <p>Adressen kan vara felstavad eller sidan flyttad.</p>
-      <p><Link to="/">Till workshopsidan</Link></p>
+      <p><Link to="/">Till startsidan</Link></p>
     </main>
   )
 }

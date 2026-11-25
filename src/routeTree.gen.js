@@ -15,6 +15,7 @@ import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as BokaIndexRouteImport } from './routes/boka.index'
 import { Route as BokaBekraftelseRouteImport } from './routes/boka.bekraftelse'
 import { Route as BokaGranskaRouteImport } from './routes/boka.granska'
+import { Route as WorkshopparTaKontrollOverDinKameraRouteImport } from './routes/workshoppar.ta-kontroll-over-din-kamera'
 import { Route as AdminBokningNrRouteImport } from './routes/admin.bokning.$nr'
 import { Route as AdminTillfalleDatumRouteImport } from './routes/admin.tillfalle.$datum'
 
@@ -48,6 +49,12 @@ const BokaGranskaRoute = BokaGranskaRouteImport.update({
   path: '/boka/granska',
   getParentRoute: () => rootRouteImport,
 })
+const WorkshopparTaKontrollOverDinKameraRoute =
+  WorkshopparTaKontrollOverDinKameraRouteImport.update({
+    id: '/workshoppar/ta-kontroll-over-din-kamera',
+    path: '/workshoppar/ta-kontroll-over-din-kamera',
+    getParentRoute: () => rootRouteImport,
+  })
 const AdminBokningNrRoute = AdminBokningNrRouteImport.update({
   id: '/bokning/$nr',
   path: '/bokning/$nr',
@@ -72,6 +79,8 @@ const rootRouteChildren = {
   AdminRoute: AdminRouteWithChildren,
   BokaBekraftelseRoute: BokaBekraftelseRoute,
   BokaGranskaRoute: BokaGranskaRoute,
+  WorkshopparTaKontrollOverDinKameraRoute:
+    WorkshopparTaKontrollOverDinKameraRoute,
   BokaIndexRoute: BokaIndexRoute,
 }
 export const routeTree = rootRouteImport._addFileChildren(rootRouteChildren)

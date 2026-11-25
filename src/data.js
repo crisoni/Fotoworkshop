@@ -31,6 +31,9 @@ export const workshop = {
   kladsel: 'Kläder efter väder.',
 }
 
+// Adressen till workshopsidan. Startsidan ligger på /
+export const workshopSokvag = '/workshoppar/ta-kontroll-over-din-kamera'
+
 // Tillfällena. id används i adressen, t.ex. /admin/tillfalle/14-november
 export const tillfallen = [
   { id: '14-november', dag: 14, datum: '2026-11-14', kort: '14 november', lang: 'Lördag 14 november', helt: 'Lördag 14 november 2026' },
