@@ -60,6 +60,9 @@ export function Webbplats({ children, medPrisrad = false }) {
           </button>
           <nav id="huvudmeny" aria-label="Huvudmeny" className="webb-nav" data-oppen={oppen}>
             <Link to="/" activeOptions={{ exact: true }}>Workshoppar</Link>
+            {/* Galleri och Priser är med för att menyn ska se ut som en riktig webbplats. Sidorna finns inte än. */}
+            <a href="#galleri" onClick={(e) => e.preventDefault()}>Galleri</a>
+            <a href="#priser" onClick={(e) => e.preventDefault()}>Priser</a>
             <a href="#om-ljusrum">Om Ljusrum</a>
             <a href="#kontakt">Kontakt</a>
           </nav>
