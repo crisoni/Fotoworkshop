@@ -64,6 +64,47 @@ function Startsida() {
         </div>
       </section>
 
+      <section className="start-workshoppar" aria-labelledby="workshoppar-rubrik">
+        <div className="start-workshoppar__huvud">
+          <div>
+            <p className="label">Workshoppar</p>
+            <h2 id="workshoppar-rubrik">Välj din nästa fotodag</h2>
+          </div>
+          {/* Sidan med alla workshoppar finns inte än, länken är med som en del av designen */}
+          <a href="#alla-workshoppar" className="text-link" onClick={(e) => e.preventDefault()}>
+            Se alla workshoppar<Ikon namn="vinkel-hoger" />
+          </a>
+        </div>
+        <ul className="start-workshoppar__lista" tabIndex={0} aria-label="Workshoppar, svep i sidled på mobil">
+          <li>
+            <Link to={workshopSokvag} className="ws-kort">
+              <img src="/bilder/kamera.jpg" alt="" loading="lazy" />
+              <span className="ws-kort__text">
+                <span className="ws-kort__titel">{workshop.titel}</span>
+                <span className="caption">Nybörjare · {formatPris(workshop.pris)}</span>
+                <span className="ws-kort__bricka ws-kort__bricka--bokbar">{tillfallen.length} datum i november</span>
+              </span>
+            </Link>
+          </li>
+          {/* Påhittade kommande workshoppar, med i designen för att visa hur sidan kan växa */}
+          {[
+            ['Porträtt i naturligt ljus', '/bilder/portratt.jpg'],
+            ['Svartvitt på gatan', '/bilder/svartvitt.jpg'],
+          ].map(([titel, bild]) => (
+            <li key={titel}>
+              <article className="ws-kort ws-kort--kommande">
+                <img src={bild} alt="" loading="lazy" />
+                <span className="ws-kort__text">
+                  <h3 className="ws-kort__titel">{titel}</h3>
+                  <span className="caption">Fortsättning</span>
+                  <span className="ws-kort__bricka">Kommer snart</span>
+                </span>
+              </article>
+            </li>
+          ))}
+        </ul>
+      </section>
+
       <section className="start-varfor" aria-labelledby="varfor-rubrik">
         <h2 id="varfor-rubrik">Därför Ljusrum</h2>
         <ul>
