@@ -41,12 +41,26 @@ function Menyval({ val }) {
 export function AdminLayout({ children }) {
   const [menyOppen, setMenyOppen] = useState(false)
   const [sok, setSok] = useState('')
+  const [sokOppen, setSokOppen] = useState(false)
+  const sokknapp = useRef(null)
+  const sokfalt = useRef(null)
   const navigate = useNavigate()
   const sokvag = useRouterState({ select: (s) => s.location.href })
   const menyknapp = useRef(null)
   const stangknapp = useRef(null)
   const varOppen = useRef(false)
-  useEffect(() => setMenyOppen(false), [sokvag])
+  useEffect(() => { setMenyOppen(false); setSokOppen(false) }, [sokvag])
+
+  // Sökningen på mobil: fältet fälls ut under toppfältet, får fokus direkt och stängs med Escape
+  useEffect(() => {
+    if (!sokOppen) return
+    sokfalt.current?.focus()
+    const tangent = (e) => {
+      if (e.key === 'Escape') { setSokOppen(false); sokknapp.current?.focus() }
+    }
+    window.addEventListener('keydown', tangent)
+    return () => window.removeEventListener('keydown', tangent)
+  }, [sokOppen])
 
   // Mobilpanelen: fokus flyttas in när den öppnas och tillbaka till menyknappen när den stängs.
   // Resten av sidan är inert medan panelen är öppen, så Tab stannar i panelen.
@@ -66,6 +80,7 @@ export function AdminLayout({ children }) {
 
   function sokAllt(e) {
     e.preventDefault()
+    setSokOppen(false)
     navigate({ to: '/admin', search: { vy: 'deltagare', q: sok.trim() || undefined } })
   }
 
@@ -113,6 +128,17 @@ export function AdminLayout({ children }) {
             <button type="button" className="icon-button adm-topp__ikon" disabled title="Ingår inte i den här versionen">
               <Ikon namn="notiser" /><span className="visually-hidden">Notiser (ingår inte)</span>
             </button>
+            <button
+              ref={sokknapp}
+              type="button"
+              className="icon-button adm-topp__sokknapp"
+              aria-expanded={sokOppen}
+              aria-controls="adm-mobilsok"
+              onClick={() => setSokOppen((o) => !o)}
+            >
+              <Ikon namn={sokOppen ? 'stang' : 'sok'} size={22} />
+              <span className="visually-hidden">{sokOppen ? 'Stäng sökningen' : 'Sök'}</span>
+            </button>
             <span className="adm-topp__avdelare" aria-hidden="true" />
             <div className="adm-anvandare">
               <img src="/bilder/maja-holm.jpg" alt="" width="40" height="40" />
@@ -135,6 +161,22 @@ export function AdminLayout({ children }) {
             </button>
           </div>
         </header>
+        {/* Bara på mobil: sökfält i full bredd under toppfältet */}
+        <div id="adm-mobilsok" className="adm-mobilsok" data-oppen={sokOppen}>
+          <form role="search" className="search-field" onSubmit={sokAllt}>
+            <Ikon namn="sok" />
+            <label htmlFor="sok-mobil" className="visually-hidden">Sök deltagare eller bokning</label>
+            <input
+              ref={sokfalt}
+              id="sok-mobil"
+              type="search"
+              enterKeyHint="search"
+              placeholder="Sök deltagare eller bokningsnr"
+              value={sok}
+              onChange={(e) => setSok(e.target.value)}
+            />
+          </form>
+        </div>
         <main id="adm-innehall" className="adm-innehall">{children}</main>
       </div>
     </div>
