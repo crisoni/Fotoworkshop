@@ -89,15 +89,25 @@
   padding-block: var(--space-24) var(--space-32);
   border-top: 1px solid #3d4055;
 }
+.webb-fot__lankar { display: flex; flex-wrap: wrap; gap: var(--space-8) var(--space-24); }
+.webb-fot__lank-accent { background: none; border: 0; padding: 0; font: inherit; cursor: pointer; }
+.webb-fot__lank-accent:hover { color: var(--canvas); text-decoration: underline; text-underline-offset: 0.2em; }
+.webb-fot__hoger { display: flex; align-items: center; gap: var(--space-24); }
+.webb-fot ul.webb-fot__sociala { display: flex; gap: var(--space-4); }
+.webb-fot__social {
+  display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: var(--radius-full);
+}
+.webb-fot a.webb-fot__social:hover { background: #33364a; text-decoration: none; }
 .webb-fot__copy { display: flex; align-items: baseline; gap: var(--space-16); color: var(--mist); }
 .webb-fot .webb-fot__lank-accent { color: var(--lavender-haze); }
+.webb-fot .webb-fot__lank-accent:hover { color: var(--canvas); }
 .webb-fot__topp { display: inline-flex; align-items: center; gap: var(--space-4); }
 .webb-fot__topp-ikon { transform: rotate(-90deg); }
 
 @media (min-width: 768px) {
   .webb-fot__kolumner { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .webb-fot__varumarke { grid-column: 1 / -1; }
-  .webb-fot__botten { grid-template-columns: 1fr auto auto; align-items: center; gap: var(--space-32); }
+  .webb-fot__botten { grid-template-columns: auto 1fr auto; align-items: center; gap: var(--space-32); }
 }
 @media (min-width: 1024px) {
   .webb-fot__kolumner { grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: var(--space-40); padding-top: 72px; }
@@ -109,3 +119,14 @@
 @media (min-width: 960px) {
   .webb--med-prisrad .webb-fot__botten { padding-bottom: var(--space-32); }
 }
+
+/* Dialog för kakor */
+.kakor {
+  width: min(100% - 2 * var(--space-24), 30rem); padding: var(--space-24);
+  border: 0; border-radius: var(--radius-md); box-shadow: var(--shadow-floating);
+  color: var(--text-primary);
+}
+.kakor::backdrop { background: rgb(32 34 48 / 0.5); }
+.kakor h2 { font-size: var(--text-h3); font-weight: 500; margin-bottom: var(--space-12); }
+.kakor p + p { margin-top: var(--space-8); }
+.kakor__knappar { display: flex; align-items: center; gap: var(--space-24); margin-top: var(--space-24); flex-wrap: wrap; }
