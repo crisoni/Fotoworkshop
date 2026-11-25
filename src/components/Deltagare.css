@@ -208,8 +208,12 @@
 .infor-dagen__ingar { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-12); }
 .infor-dagen__ingar li { display: flex; align-items: center; gap: var(--space-8); min-width: 0; overflow-wrap: anywhere; }
 .infor-dagen__ingar svg { flex: none; color: var(--icon-brand); }
-.infor-dagen__ingar .infor-dagen__ingar--inte svg { color: var(--ember); }
+.infor-dagen__ingar.infor-dagen__ingar--inte svg { color: var(--ember); }
+/* Ingår och Ingår inte: under varandra på mobil, bredvid varandra från 600 px */
+.infor-dagen__ingar-rad { display: grid; gap: var(--space-24); }
+.infor-dagen__ingar-rad .infor-dagen__ingar--inte { grid-template-columns: 1fr; }
 @media (max-width: 359px) { .infor-dagen__ingar { grid-template-columns: 1fr; } }
 @media (min-width: 600px) {
+  .infor-dagen__ingar-rad { display: flex; flex-wrap: wrap; gap: var(--space-24) 56px; }
   .infor-dagen__ingar { display: flex; flex-wrap: wrap; gap: var(--space-12) var(--space-32); }
 }
