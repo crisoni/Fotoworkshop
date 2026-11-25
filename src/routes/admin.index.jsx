@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
 import { Statusbricka } from '../components/AdminLayout'
 import { Ikon } from '../components/Ikon'
+import { Sokfalt } from '../components/Sokfalt'
 import { useBokning, matchar } from '../bokningar'
 import { workshop, tillfallen, tillfalleMedId, formatPris } from '../data'
 
@@ -119,17 +120,13 @@ function DeltagarFilter() {
         </select>
         <Ikon namn="vinkel-ner" />
       </div>
-      <div className="search-field">
-        <Ikon namn="sok" />
-        <label className="visually-hidden" htmlFor="sok-deltagare">Sök deltagare</label>
-        <input
-          id="sok-deltagare"
-          type="search"
-          placeholder="Sök namn eller e-post"
-          value={q ?? ''}
-          onChange={(e) => satt({ q: e.target.value || undefined })}
-        />
-      </div>
+      <Sokfalt
+        id="sok-deltagare"
+        label="Sök deltagare"
+        placeholder="Sök namn eller e-post"
+        value={q ?? ''}
+        onChange={(v) => satt({ q: v || undefined })}
+      />
     </div>
   )
 }

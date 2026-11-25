@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound, useNavigate } from '@tanstack/react-router'
 import { Statusbricka, Tillbakalank } from '../components/AdminLayout'
 import { Ikon } from '../components/Ikon'
+import { Sokfalt } from '../components/Sokfalt'
 import { useBokning, matchar } from '../bokningar'
 import { workshop, tillfalleMedId, formatPris } from '../data'
 
@@ -41,17 +42,14 @@ function Tillfalle() {
 
       <div className="adm-verktyg">
         <h2 className="adm-sektionsrubrik">Deltagare ({deltagare.length})</h2>
-        <div className="search-field adm-verktyg__sok">
-          <Ikon namn="sok" />
-          <label className="visually-hidden" htmlFor="sok-tillfalle">Sök bland deltagarna</label>
-          <input
-            id="sok-tillfalle"
-            type="search"
-            placeholder="Sök namn, e-post eller bokningsnr"
-            value={q ?? ''}
-            onChange={(e) => navigate({ search: { q: e.target.value || undefined }, replace: true })}
-          />
-        </div>
+        <Sokfalt
+          id="sok-tillfalle"
+          className="adm-verktyg__sok"
+          label="Sök bland deltagarna"
+          placeholder="Sök namn, e-post eller bokningsnr"
+          value={q ?? ''}
+          onChange={(v) => navigate({ search: { q: v || undefined }, replace: true })}
+        />
       </div>
 
       {lista.length === 0 ? (

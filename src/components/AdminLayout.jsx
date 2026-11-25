@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate, useRouterState } from '@tanstack/react-router'
 import { Ikon } from './Ikon'
 import { Logomarke } from './Logomarke'
+import { Sokfalt } from './Sokfalt'
 import './Admin.css'
 
 // Menyval och knappar som ingår i designen men inte i uppgiften (avgränsningen i casebladet)
@@ -110,17 +111,15 @@ export function AdminLayout({ children }) {
       <div className="adm-huvudyta" inert={menyOppen || undefined}>
         <header className="adm-topp">
           <Link to="/admin" className="adm-topp__logo"><Logomarke size={26} />LJUSRUM</Link>
-          <form role="search" className="search-field adm-topp__sok" onSubmit={sokAllt}>
-            <Ikon namn="sok" />
-            <label htmlFor="sok-allt" className="visually-hidden">Sök deltagare eller bokning</label>
-            <input
-              id="sok-allt"
-              type="search"
-              placeholder="Sök deltagare eller bokningsnr"
-              value={sok}
-              onChange={(e) => setSok(e.target.value)}
-            />
-          </form>
+          <Sokfalt
+            id="sok-allt"
+            className="adm-topp__sok"
+            label="Sök deltagare eller bokning"
+            placeholder="Sök deltagare eller bokningsnr"
+            value={sok}
+            onChange={setSok}
+            onSubmit={sokAllt}
+          />
           <div className="adm-topp__hoger">
             <button type="button" className="icon-button adm-topp__ikon" disabled title="Ingår inte i den här versionen">
               <Ikon namn="fraga" /><span className="visually-hidden">Hjälp (ingår inte)</span>
@@ -163,19 +162,16 @@ export function AdminLayout({ children }) {
         </header>
         {/* Bara på mobil: sökfält i full bredd under toppfältet */}
         <div id="adm-mobilsok" className="adm-mobilsok" data-oppen={sokOppen}>
-          <form role="search" className="search-field" onSubmit={sokAllt}>
-            <Ikon namn="sok" />
-            <label htmlFor="sok-mobil" className="visually-hidden">Sök deltagare eller bokning</label>
-            <input
-              ref={sokfalt}
-              id="sok-mobil"
-              type="search"
-              enterKeyHint="search"
-              placeholder="Sök deltagare eller bokningsnr"
-              value={sok}
-              onChange={(e) => setSok(e.target.value)}
-            />
-          </form>
+          <Sokfalt
+            id="sok-mobil"
+            inputRef={sokfalt}
+            enterKeyHint="search"
+            label="Sök deltagare eller bokning"
+            placeholder="Sök deltagare eller bokningsnr"
+            value={sok}
+            onChange={setSok}
+            onSubmit={sokAllt}
+          />
         </div>
         <main id="adm-innehall" className="adm-innehall">{children}</main>
       </div>

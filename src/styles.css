@@ -185,3 +185,14 @@ p { margin: 0; }
 
 /* Logomärke framför ordbilden LJUSRUM */
 .logomarke { flex: none; color: #7622da; }
+
+/* Webbläsarens eget töm-kryss döljs. Sokfalt.jsx har en egen knapp: 40 px klickyta, Steel, fokusring. */
+.search-field input::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
+.search-field { padding-right: var(--space-4); }
+.search-field input { padding-right: var(--space-8); }
+.search-field__tom {
+  display: inline-grid; place-items: center; flex: none; width: 36px; height: 36px; margin-block: -4px;
+  border: 0; border-radius: var(--radius-sm); background: none; color: var(--text-secondary); cursor: pointer;
+}
+.search-field__tom:hover { background: var(--porcelain); color: var(--text-primary); }
+.search-field__tom:focus-visible { outline-width: 2px; outline-offset: -2px; }
