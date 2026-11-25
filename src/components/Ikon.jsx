@@ -2,6 +2,12 @@
 // Färgen följer texten runt ikonen (currentColor), storleken styrs med size.
 
 const ikoner = {
+  // Dela: tre noder (ritad med streck i stället för fyllning)
+  dela: {
+    vb: '0 0 24 24',
+    streck: true,
+    d: ['M18 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z', 'M6 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z', 'M18 22a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z', 'M8.6 13.5l6.8 4', 'M15.4 6.5l-6.8 4'],
+  },
   meny: {
     vb: '0 0 24 24',
     d: [
@@ -146,7 +152,11 @@ export function Ikon({ namn, size = 20, className, label }) {
       width={size}
       height={size}
       viewBox={ikon.vb}
-      fill="currentColor"
+      fill={ikon.streck ? 'none' : 'currentColor'}
+      stroke={ikon.streck ? 'currentColor' : undefined}
+      strokeWidth={ikon.streck ? 1.8 : undefined}
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className={className}
       aria-hidden={label ? undefined : 'true'}
       role={label ? 'img' : undefined}

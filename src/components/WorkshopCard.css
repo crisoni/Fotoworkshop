@@ -26,3 +26,7 @@
 .workshop-card__stjarnor { display: inline-flex; gap: 2px; color: var(--icon-accent); }
 
 .workshop-card__info { padding-top: var(--space-8); }
+
+/* Rubrik med plats för t.ex. dela-knappen till höger */
+.workshop-card__titelrad { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-12); }
+.workshop-card__titelrad > .icon-button { margin-top: 2px; margin-right: -8px; }

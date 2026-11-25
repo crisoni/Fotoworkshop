@@ -7,6 +7,8 @@ export const workshop = {
   tid: '10:00–15:00',
   plats: 'Södermalm & utomhus i närheten',
   platsLang: 'Ljusrum fotostudio på Södermalm i Stockholm och utomhus i närheten',
+  // Ljusrum är påhittat, så adressen är en platshållare. Byt till en riktig adress om det behövs.
+  adress: 'Ljusrum fotostudio, Södermalm, Stockholm',
   pris: 1200,
   maxDeltagare: 10,
   kortOm:
@@ -24,9 +26,9 @@ export const workshop = {
 
 // Tillfällena. id används i adressen, t.ex. /admin/tillfalle/14-november
 export const tillfallen = [
-  { id: '14-november', dag: 14, kort: '14 november', lang: 'Lördag 14 november', helt: 'Lördag 14 november 2026' },
-  { id: '21-november', dag: 21, kort: '21 november', lang: 'Lördag 21 november', helt: 'Lördag 21 november 2026' },
-  { id: '28-november', dag: 28, kort: '28 november', lang: 'Lördag 28 november', helt: 'Lördag 28 november 2026' },
+  { id: '14-november', dag: 14, datum: '2026-11-14', kort: '14 november', lang: 'Lördag 14 november', helt: 'Lördag 14 november 2026' },
+  { id: '21-november', dag: 21, datum: '2026-11-21', kort: '21 november', lang: 'Lördag 21 november', helt: 'Lördag 21 november 2026' },
+  { id: '28-november', dag: 28, datum: '2026-11-28', kort: '28 november', lang: 'Lördag 28 november', helt: 'Lördag 28 november 2026' },
 ]
 
 export const tillfalleMedId = (id) => tillfallen.find((t) => t.id === id)
@@ -43,3 +45,6 @@ export const exempelbokningar = [
 ]
 
 export const formatPris = (kr) => `${kr.toLocaleString('sv-SE').replace(/ /g, ' ')} kr`
+
+// Länk till kartan för vägbeskrivning
+export const kartlank = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(workshop.adress)}`

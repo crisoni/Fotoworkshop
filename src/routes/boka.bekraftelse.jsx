@@ -4,7 +4,8 @@ import { Webbplats } from '../components/Webbplats'
 import { Ikon } from '../components/Ikon'
 import { ViktigInfo } from '../components/ViktigInfo'
 import { useBokning } from '../bokningar'
-import { workshop, tillfalleMedId, formatPris } from '../data'
+import { workshop, tillfalleMedId, formatPris, kartlank } from '../data'
+import { laddaNerKalenderfil, googleKalenderlank } from '../kalenderfil'
 import '../components/Deltagare.css'
 
 export const Route = createFileRoute('/boka/bekraftelse')({
@@ -46,6 +47,20 @@ function Bekraftelse() {
             <span className="belopp">{formatPris(workshop.pris)}</span>
           </div>
         </section>
+
+        <div className="efter-bokning">
+          <button type="button" className="button button--block" onClick={() => laddaNerKalenderfil(senaste, tillfalle)}>
+            <Ikon namn="kalender" />Lägg till i kalender
+          </button>
+          <div className="efter-bokning__lankar">
+            <a className="text-link" href={googleKalenderlank(senaste, tillfalle)} target="_blank" rel="noopener noreferrer">
+              Google Kalender<span className="visually-hidden"> (öppnas i ny flik)</span>
+            </a>
+            <a className="text-link" href={kartlank} target="_blank" rel="noopener noreferrer">
+              <Ikon namn="plats" />Vägbeskrivning<span className="visually-hidden"> (öppnas i ny flik)</span>
+            </a>
+          </div>
+        </div>
 
         <hr className="divider" />
 

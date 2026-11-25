@@ -141,3 +141,33 @@
 .bekraftelse__epost { color: var(--text-secondary); overflow-wrap: anywhere; }
 .bekraftelse__detaljer { display: grid; gap: var(--space-12); padding-block: var(--space-8); }
 .bekraftelse__tillbaka { text-align: center; }
+
+/* Fullbokat datum: genomstruket, går inte att välja */
+.kalender__dag--full { color: var(--text-secondary); font-size: var(--text-caption); text-decoration: line-through; }
+
+/* Lediga platser bredvid tidvalet. Få platser kvar visas i Ember. */
+.tider { align-items: center; }
+.platser { display: inline-flex; align-items: center; gap: var(--space-8); font-size: var(--text-caption); color: var(--text-secondary); }
+.platser::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #2e7d4f; }
+.platser--fa { color: var(--text-primary); }
+.platser--fa::before { background: var(--ember); }
+
+/* Betalning på plats: tydlig rad i granska-kortet */
+.betalning {
+  display: flex; gap: var(--space-12); align-items: flex-start;
+  padding: var(--space-12) var(--space-16); border-radius: var(--radius-sm);
+  background: var(--paper); font-size: var(--text-caption); line-height: 1.5;
+}
+.betalning svg { flex: none; color: var(--icon-brand); margin-top: 1px; }
+.betalning strong { font-weight: 500; }
+
+/* Godkänn villkor: 24 px kryssruta, hela raden är klickbar */
+.villkor { display: grid; gap: var(--space-8); }
+.villkor__rad { display: flex; gap: var(--space-12); align-items: flex-start; cursor: pointer; line-height: 1.5; }
+.villkor__rad input { flex: none; width: 22px; height: 22px; margin: 1px 0 0; accent-color: var(--aubergine); cursor: pointer; }
+.villkor__rad input[aria-invalid='true'] { outline: 2px solid #b3261e; outline-offset: 2px; }
+
+/* Efter bokningen: kalender och vägbeskrivning */
+.efter-bokning { display: grid; gap: var(--space-16); }
+.efter-bokning .button svg { flex: none; }
+.efter-bokning__lankar { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-8) var(--space-32); }

@@ -1,0 +1,31 @@
+/* Dela-dialogen, i samma stil som Udemys: rubrik och stäng, länkfält med Kopiera, runda kanalknappar */
+.dela-knapp { color: var(--text-primary); }
+.dela {
+  width: min(100% - 2 * var(--space-24), 36rem); padding: var(--space-24) var(--space-24) var(--space-32);
+  border: 0; border-radius: 20px; box-shadow: var(--shadow-floating); color: var(--text-primary);
+}
+.dela::backdrop { background: rgb(32 34 48 / 0.45); }
+.dela[open] { animation: dela-in 0.25s cubic-bezier(0.2, 0.8, 0.2, 1); }
+@keyframes dela-in { from { opacity: 0; transform: translateY(12px) scale(0.98); } }
+.dela__huvud { display: flex; align-items: center; justify-content: space-between; gap: var(--space-16); margin-bottom: var(--space-24); }
+.dela__huvud h2 { font-size: var(--text-h3); font-weight: 700; }
+.dela__huvud .icon-button { margin-right: -8px; }
+.dela__rad { display: flex; gap: var(--space-12); }
+.dela__rad input {
+  flex: 1; min-width: 0; height: 48px; padding: 0 var(--space-16);
+  border: 1px solid var(--border-input); border-radius: var(--radius-sm); background: var(--surface-card); font-size: 1rem;
+}
+.dela__rad input:focus { outline: none; border: 2px solid var(--border-focus); padding-inline: 15px; }
+.dela__rad .button { min-height: 48px; min-width: 104px; }
+.dela__kanaler { display: flex; justify-content: center; gap: var(--space-24); margin-top: var(--space-24); }
+.dela__kanal {
+  display: inline-grid; place-items: center; width: 48px; height: 48px; border-radius: var(--radius-full);
+  border: 1.5px solid var(--aubergine); color: var(--aubergine);
+}
+.dela__kanal:hover { background: var(--lavender-haze); }
+@media (max-width: 479px) {
+  .dela__rad { flex-direction: column; }
+  .dela__rad input { flex: none; }
+  .dela__rad .button { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { .dela[open] { animation: none; } }

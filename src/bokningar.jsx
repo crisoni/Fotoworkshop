@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
-import { exempelbokningar } from './data'
+import { exempelbokningar, workshop } from './data'
 
 // Delat tillstånd för bokningsflödet och adminsidan.
 // Utkastet sparas i sessionStorage så att sidan klarar en omladdning mitt i bokningen.
@@ -81,3 +81,8 @@ export function matchar(bokning, q) {
   const s = q.trim().toLowerCase()
   return [bokning.nr, bokning.namn, bokning.epost].some((v) => v.toLowerCase().includes(s))
 }
+
+// Lediga platser på ett tillfälle (högst 10 deltagare)
+export const platserKvar = (alla, tillfalleId) =>
+  Math.max(0, workshop.maxDeltagare - alla.filter((b) => b.tillfalle === tillfalleId).length)
+export const platserText = (n) => (n === 0 ? 'Fullbokat' : n === 1 ? '1 plats kvar' : `${n} platser kvar`)

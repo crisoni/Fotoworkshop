@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { createFileRoute, Link, Navigate, useNavigate } from '@tanstack/react-router'
 import { Webbplats } from '../components/Webbplats'
 import { Ikon } from '../components/Ikon'
@@ -17,6 +17,8 @@ function Granska() {
   const { utkast, bekrafta } = useBokning()
   const navigate = useNavigate()
   const bekraftad = useRef(false)
+  const [godkant, setGodkant] = useState(false)
+  const [visaFel, setVisaFel] = useState(false)
 
   // Efter bekräftelsen töms utkastet. Då ska sidan inte skicka tillbaka till steg 1.
   if (bekraftad.current) return null
@@ -26,6 +28,11 @@ function Granska() {
   const tillfalle = tillfalleMedId(utkast.tillfalle)
 
   function bekraftaBokning() {
+    if (!godkant) {
+      setVisaFel(true)
+      document.getElementById('villkor')?.focus()
+      return
+    }
     bekraftad.current = true
     bekrafta()
     navigate({ to: '/boka/bekraftelse', replace: true })
@@ -85,9 +92,33 @@ function Granska() {
               <span>Vuxen × 1</span>
               <span className="belopp">{formatPris(workshop.pris)}</span>
             </div>
-            <p className="caption">Betalas på plats</p>
           </div>
+          <p className="betalning">
+            <Ikon namn="kort" />
+            <span><strong>Du betalar på plats</strong> när workshoppen börjar. Inget dras nu.</span>
+          </p>
         </section>
+
+        <div className="villkor">
+          <label className="villkor__rad">
+            <input
+              id="villkor"
+              type="checkbox"
+              checked={godkant}
+              aria-invalid={visaFel && !godkant}
+              aria-describedby={visaFel && !godkant ? 'villkor-fel' : undefined}
+              onChange={(e) => { setGodkant(e.target.checked); if (e.target.checked) setVisaFel(false) }}
+            />
+            <span>
+              Jag godkänner{' '}
+              <a href="https://www.folkuniversitetet.se/om-folkuniversitetet/anmalningsvillkor/" target="_blank" rel="noopener noreferrer">
+                anmälningsvillkoren<span className="visually-hidden"> (öppnas i ny flik)</span>
+              </a>
+              . Bokningen är bindande.
+            </span>
+          </label>
+          {visaFel && !godkant && <p id="villkor-fel" className="falt__fel">Godkänn villkoren för att bekräfta bokningen.</p>}
+        </div>
 
         <div className="granska__handling">
           <button type="button" className="button button--block" onClick={bekraftaBokning}>Bekräfta bokning</button>

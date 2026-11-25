@@ -3,6 +3,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { WorkshopCard } from '../components/WorkshopCard'
 import { Webbplats } from '../components/Webbplats'
 import { ViktigInfo } from '../components/ViktigInfo'
+import { Dela } from '../components/Dela'
 import { workshop, formatPris } from '../data'
 import '../components/Deltagare.css'
 
@@ -20,7 +21,7 @@ function Workshopsida() {
     <Webbplats medPrisrad>
       <div className="sida workshop">
         <div className="workshop__innehall">
-          <WorkshopCard />
+          <WorkshopCard titelTillagg={<Dela titel={workshop.titel} />} />
 
           <hr className="divider" />
 

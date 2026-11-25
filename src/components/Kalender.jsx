@@ -1,5 +1,6 @@
 import { Ikon } from './Ikon'
 import { tillfallen } from '../data'
+import { platserText } from '../bokningar'
 
 // Månadsvy för november 2026. Veckan börjar på måndag.
 // Workshopdatum (lördagar 14, 21, 28) är valbara, övriga dagar går inte att välja.
@@ -7,7 +8,8 @@ const veckodagar = ['Mån', 'Tis', 'Ons', 'Tor', 'Fre', 'Lör', 'Sön']
 const forstaVeckodag = 6 // 1 november 2026 är en söndag (index 6 när måndag = 0)
 const dagarIManaden = 30
 
-export function Kalender({ vald, onValj }) {
+// kvar(id) ger antal lediga platser. Fullbokade datum går inte att välja.
+export function Kalender({ vald, onValj, kvar = () => 10 }) {
   const celler = [
     ...Array.from({ length: forstaVeckodag }, () => null),
     ...Array.from({ length: dagarIManaden }, (_, i) => i + 1),
@@ -39,6 +41,16 @@ export function Kalender({ vald, onValj }) {
                 if (!tillfalle) {
                   return <td key={j}><span className="kalender__dag kalender__dag--inaktiv">{dag}</span></td>
                 }
+                const lediga = kvar(tillfalle.id)
+                if (lediga === 0) {
+                  return (
+                    <td key={j}>
+                      <span className="kalender__dag kalender__dag--full">
+                        {dag}<span className="visually-hidden">, fullbokat</span>
+                      </span>
+                    </td>
+                  )
+                }
                 const arVald = vald === tillfalle.id
                 return (
                   <td key={j}>
@@ -46,7 +58,7 @@ export function Kalender({ vald, onValj }) {
                       type="button"
                       className={arVald ? 'kalender__dag kalender__dag--vald' : 'kalender__dag kalender__dag--ledig'}
                       aria-pressed={arVald}
-                      aria-label={tillfalle.helt}
+                      aria-label={`${tillfalle.helt}, ${platserText(lediga).toLowerCase()}`}
                       onClick={() => onValj(tillfalle.id)}
                     >
                       {dag}

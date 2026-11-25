@@ -14,13 +14,17 @@ export function WorkshopCard({
   image = '/bilder/kamera.jpg',
   imageAlt = 'Händer som håller en analog systemkamera framför ansiktet',
   headingLevel = 1,
+  titelTillagg = null,
 }) {
   const Rubrik = `h${headingLevel}`
   return (
     <article className="workshop-card">
       <Bild src={image} alt={imageAlt} />
       <div className="workshop-card__text">
-        <Rubrik className="workshop-card__titel">{title}</Rubrik>
+        <div className="workshop-card__titelrad">
+          <Rubrik className="workshop-card__titel">{title}</Rubrik>
+          {titelTillagg}
+        </div>
         {rating && (
           <p className="workshop-card__betyg">
             <span className="workshop-card__stjarnor" aria-hidden="true">

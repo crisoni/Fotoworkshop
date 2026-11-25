@@ -3,7 +3,7 @@ import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
 import { Webbplats } from '../components/Webbplats'
 import { Kalender } from '../components/Kalender'
 import { Ikon } from '../components/Ikon'
-import { useBokning, giltigEpost, utkastKlart } from '../bokningar'
+import { useBokning, giltigEpost, utkastKlart, platserKvar, platserText } from '../bokningar'
 import { workshop } from '../data'
 import '../components/Deltagare.css'
 
@@ -17,7 +17,8 @@ export const Route = createFileRoute('/boka/')({
 // så det kommer först (ändrat efter design critique, Figma-ramarna 02–05 har uppgifterna först).
 // Dator (ram D02–D05): kalender och tid till vänster, uppgifter och Fortsätt i ett kort till höger.
 function Boka() {
-  const { utkast, uppdatera } = useBokning()
+  const { utkast, uppdatera, alla } = useBokning()
+  const kvar = (id) => platserKvar(alla, id)
   const navigate = useNavigate()
   const [epostLamnad, setEpostLamnad] = useState(false)
   const klart = utkastKlart(utkast)
@@ -57,6 +58,7 @@ function Boka() {
           <div id="datum" tabIndex={-1}>
             <Kalender
               vald={utkast.tillfalle}
+              kvar={kvar}
               onValj={(id) => uppdatera({ tillfalle: id, tid: utkast.tid ?? null })}
             />
           </div>
@@ -74,6 +76,9 @@ function Boka() {
               >
                 {workshop.tid}
               </button>
+              <p className={kvar(utkast.tillfalle) <= 3 ? 'platser platser--fa' : 'platser'}>
+                {platserText(kvar(utkast.tillfalle))} av {workshop.maxDeltagare}
+              </p>
             </div>
           ) : (
             <p className="caption">Välj ett datum för att se tider.</p>
