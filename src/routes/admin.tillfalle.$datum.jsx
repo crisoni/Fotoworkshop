@@ -33,7 +33,7 @@ function Tillfalle() {
         </div>
         <ul className="adm-meta">
           <li><Ikon namn="kalender" />{tillfalle.helt}</li>
-          <li><Ikon namn="klocka" />{workshop.tid}</li>
+          <li><Ikon namn="klocka" />Kl {workshop.tid}</li>
           <li><Ikon namn="plats" />{workshop.plats}</li>
           <li><Ikon namn="anvandare" />{deltagare.length} av {workshop.maxDeltagare} anmälda</li>
         </ul>
