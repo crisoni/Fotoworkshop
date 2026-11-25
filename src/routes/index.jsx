@@ -31,7 +31,7 @@ function Startsida() {
             En dag för vuxna nybörjare som vill komma vidare från autoläget. Korta genomgångar och mycket övning, i studion och ute på Södermalm.
           </p>
           <div className="start-hero__knappar">
-            <Link to="/boka" className="button start-knapp start-knapp--ljus">
+            <Link to="/boka" className="button start-knapp">
               <Ikon namn="kalender" />Välj datum
             </Link>
             <Link to={workshopSokvag} className="button start-knapp start-knapp--glas">

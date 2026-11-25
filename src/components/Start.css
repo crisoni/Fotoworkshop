@@ -32,9 +32,6 @@
   .start-knapp { width: 100%; }
 }
 .start-knapp svg { flex: none; }
-.start-knapp--ljus { background: var(--canvas); color: var(--text-primary); }
-.start-knapp--ljus:hover { background: var(--porcelain); }
-.start-knapp--ljus svg { color: var(--icon-brand); }
 .start-knapp--glas {
   background: rgb(255 255 255 / 0.14); color: var(--canvas); border: 1px solid rgb(255 255 255 / 0.35);
   -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
@@ -134,7 +131,7 @@
 }
 .ws-kort__bricka--bokbar { background: var(--lavender-haze); color: var(--text-primary); }
 a.ws-kort:hover .ws-kort__titel { color: var(--text-link); }
-a.ws-kort:hover img { transform: scale(1.03); }
+.ws-kort:hover img { transform: scale(1.03); }
 /* Mobil: en kolumn, kompakta kort med bilden till vänster och texten till höger.
    Från 768 px: tre kort bredvid varandra med bilden överst. */
 @media (max-width: 767px) {
@@ -150,4 +147,4 @@ a.ws-kort:hover img { transform: scale(1.03); }
 @media (min-width: 960px) {
   .start-workshoppar { padding-top: 80px; }
 }
-@media (prefers-reduced-motion: reduce) { .ws-kort img { transition: none; } a.ws-kort:hover img { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .ws-kort img { transition: none; } .ws-kort:hover img { transform: none; } }
