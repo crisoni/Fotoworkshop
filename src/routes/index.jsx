@@ -75,7 +75,7 @@ function Startsida() {
             Se alla workshoppar<Ikon namn="vinkel-hoger" />
           </a>
         </div>
-        <ul className="start-workshoppar__lista" tabIndex={0} aria-label="Workshoppar, svep i sidled på mobil">
+        <ul className="start-workshoppar__lista">
           <li>
             <Link to={workshopSokvag} className="ws-kort">
               <img src="/bilder/kamera.jpg" alt="" loading="lazy" />

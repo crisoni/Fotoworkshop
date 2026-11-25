@@ -41,7 +41,8 @@
 .start-knapp--glas:hover { background: rgb(255 255 255 / 0.24); }
 .start-hero :focus-visible { outline-color: var(--lavender-haze); }
 .start-hero__fakta { display: flex; flex-wrap: wrap; gap: var(--space-4) var(--space-16); font-size: var(--text-caption); color: rgb(255 255 255 / 0.8); }
-.start-hero__fakta span + span::before { content: ''; display: inline-block; width: 4px; height: 4px; border-radius: 50%; background: currentColor; margin: 0 var(--space-16) 3px 0; opacity: 0.7; }
+/* Punkten sitter efter varje fakta, så att en ny rad aldrig börjar med en punkt */
+.start-hero__fakta span:not(:last-child)::after { content: ''; display: inline-block; width: 4px; height: 4px; border-radius: 50%; background: currentColor; margin: 0 0 3px var(--space-16); opacity: 0.7; }
 
 /* Tillfällen: mobil = lista under texten, dator = glaskort i en kolumn till höger */
 .start-tillfallen ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-8); }
@@ -49,11 +50,11 @@
   width: 100%; display: grid; gap: 2px;
   text-align: left; cursor: pointer;
   padding: var(--space-12) var(--space-16); border-radius: var(--radius-md);
-  color: var(--canvas); background: rgb(255 255 255 / 0.12); border: 1px solid rgb(255 255 255 / 0.28);
+  color: var(--canvas); background: rgb(32 34 48 / 0.55); border: 1px solid rgb(255 255 255 / 0.28);
   -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
   transition: background 0.2s, transform 0.2s;
 }
-.start-kort:hover { background: rgb(255 255 255 / 0.22); }
+.start-kort:hover { background: rgb(32 34 48 / 0.75); border-color: rgb(255 255 255 / 0.5); }
 .start-kort:disabled { cursor: default; opacity: 0.6; }
 .start-kort__datum { font-weight: 500; }
 .start-kort__platser { font-size: var(--text-caption); color: rgb(255 255 255 / 0.8); }
@@ -131,17 +132,16 @@
 .ws-kort__bricka--bokbar { background: var(--lavender-haze); color: var(--text-primary); }
 a.ws-kort:hover .ws-kort__titel { color: var(--text-link); }
 a.ws-kort:hover img { transform: scale(1.03); }
-/* Mobil: korten i en rad som sveps i sidled, nästa kort sticker fram i kanten */
-@media (max-width: 599px) {
-  .start-workshoppar__lista {
-    display: flex; gap: var(--space-12); overflow-x: auto; scroll-snap-type: x mandatory;
-    margin-inline: calc(-1 * var(--space-24)); padding: 2px var(--space-24) var(--space-8);
-    scroll-padding-inline: var(--space-24); scrollbar-width: none;
-  }
-  .start-workshoppar__lista::-webkit-scrollbar { display: none; }
-  .start-workshoppar__lista > li { flex: 0 0 78%; scroll-snap-align: start; }
+/* Mobil: en kolumn, kompakta kort med bilden till vänster och texten till höger.
+   Från 768 px: tre kort bredvid varandra med bilden överst. */
+@media (max-width: 767px) {
+  .ws-kort { grid-template-columns: 38% minmax(0, 1fr); }
+  .ws-kort img { aspect-ratio: auto; height: 100%; min-height: 128px; }
+  .ws-kort__text { padding: var(--space-12) var(--space-16); align-content: center; }
+  .ws-kort__titel { font-size: 1rem; }
+  .ws-kort__bricka { margin-top: var(--space-4); }
 }
-@media (min-width: 600px) {
+@media (min-width: 768px) {
   .start-workshoppar__lista { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 @media (min-width: 960px) {
