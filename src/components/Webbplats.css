@@ -1,4 +1,7 @@
-.webb { min-height: 100dvh; display: flex; flex-direction: column; background: var(--surface-subtle); }
+/* Besökarnas sidor på vit bakgrund (Canvas). Korten får kant i Mist så att de håller ihop
+   som grupper även utan färgskillnad mot sidan. Adminvyn behåller Paper. */
+.webb { min-height: 100dvh; display: flex; flex-direction: column; background: var(--surface-card); }
+.webb .card, .webb .prisrad { border-color: var(--border-strong); }
 
 
 /* ---------- Sidhuvud (Topbar 64 px) ---------- */
