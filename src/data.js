@@ -16,7 +16,7 @@ export const workshop = {
   merOm:
     'Deltagarna får öva på bländare, slutartid, ISO, fokus, ljus och komposition. Inga tidigare fotokunskaper behövs.',
   forkunskaper:
-    'Inga tidigare fotokunskaper behövs. Du behöver en egen kamera där du kan ställa in bländare, slutartid och ISO. Mobilkamera räcker inte.',
+    'Inga tidigare fotokunskaper behövs. Du behöver en egen kamera där du kan ställa in bländare, slutartid och ISO. Mobilkamera räcker inte. Extra objektiv och stativ behövs inte.',
   ingar: 'Handledning, övningsmaterial och fika. Lunch ingår inte.',
   taMedKort: 'Egen kamera, laddat batteri och minneskort.',
   taMed:
