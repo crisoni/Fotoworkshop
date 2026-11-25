@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
 import { WorkshopCard } from '../components/WorkshopCard'
 import { Webbplats } from '../components/Webbplats'
 import { ViktigInfo } from '../components/ViktigInfo'
 import { Dela } from '../components/Dela'
-import { workshop, formatPris } from '../data'
+import { workshop, formatPris, tillfallen } from '../data'
+import { useBokning, platserKvar, platserText } from '../bokningar'
 import '../components/Deltagare.css'
 
 export const Route = createFileRoute('/')({
@@ -16,6 +17,14 @@ export const Route = createFileRoute('/')({
 // Dator: innehållet till vänster och ett bokningskort till höger som följer med vid scroll.
 function Workshopsida() {
   const [visaMer, setVisaMer] = useState(false)
+  const { alla, uppdatera } = useBokning()
+  const navigate = useNavigate()
+
+  // Ett tillfälle i priskortet väljer datumet direkt och går till bokningen
+  function valjTillfalle(id) {
+    uppdatera({ tillfalle: id })
+    navigate({ to: '/boka' })
+  }
 
   return (
     <Webbplats medPrisrad>
@@ -61,6 +70,23 @@ function Workshopsida() {
             <span className="prisrad__belopp">{formatPris(workshop.pris)}</span>
           </div>
           <Link to="/boka" className="button prisrad__knapp">Boka</Link>
+          {/* Bara på dator: tillfällen med lediga platser */}
+          <div className="prisrad__tillfallen">
+            <h2 className="label" id="tillfallen-rubrik">Tillfällen</h2>
+            <ul aria-labelledby="tillfallen-rubrik">
+              {tillfallen.map((t) => {
+                const kvar = platserKvar(alla, t.id)
+                return (
+                  <li key={t.id}>
+                    <button type="button" className="tillfalle-rad" disabled={kvar === 0} onClick={() => valjTillfalle(t.id)}>
+                      <span className="tillfalle-rad__datum">{t.lang}</span>
+                      <span className={kvar <= 3 ? 'platser platser--fa' : 'platser'}>{platserText(kvar)}</span>
+                    </button>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
         </aside>
       </div>
     </Webbplats>
