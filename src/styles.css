@@ -182,3 +182,6 @@ p { margin: 0; }
 .search-field input { flex: 1; min-width: 0; border: 0; outline: 0; background: none; font-size: 1rem; }
 .search-field:focus-within { border-color: var(--border-focus); box-shadow: 0 0 0 1px var(--border-focus); }
 .search-field input::placeholder { color: var(--text-secondary); }
+
+/* Logomärke framför ordbilden LJUSRUM */
+.logomarke { flex: none; color: #7622da; }

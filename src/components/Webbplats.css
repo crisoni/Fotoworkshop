@@ -17,6 +17,7 @@
 .logotyp {
   font-size: 1.125rem; font-weight: 500; line-height: 1.3; letter-spacing: 0.08em;
   color: var(--text-primary); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 10px;
 }
 .webb-huvud__knapp { margin-right: -8px; }
 
@@ -79,7 +80,10 @@
 .webb-fot__logo {
   font-size: 1.125rem; font-weight: 500; letter-spacing: 0.08em; line-height: 1.3;
   color: var(--canvas) !important; text-decoration: none !important; width: fit-content;
+  display: inline-flex; align-items: center; gap: 10px;
 }
+.webb-fot .logomarke { color: var(--lavender-haze); }
+.webb-fot__logo--liten { gap: 8px; }
 .webb-fot__logo--liten { font-size: 1rem; }
 .webb-fot__kolumn { display: grid; gap: var(--space-12); align-content: start; }
 .webb-fot__rubrik { font-size: var(--text-body); font-weight: 500; color: var(--canvas); }
@@ -101,7 +105,7 @@
   display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: var(--radius-full);
 }
 .webb-fot a.webb-fot__social:hover { background: #33364a; text-decoration: none; }
-.webb-fot__copy { display: flex; align-items: baseline; gap: var(--space-16); color: var(--mist); }
+.webb-fot__copy { display: flex; align-items: center; gap: var(--space-16); color: var(--mist); }
 .webb-fot .webb-fot__lank-accent { color: var(--lavender-haze); }
 .webb-fot .webb-fot__lank-accent:hover { color: var(--canvas); }
 .webb-fot__topp { display: inline-flex; align-items: center; gap: var(--space-4); }

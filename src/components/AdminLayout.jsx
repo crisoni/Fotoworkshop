@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useRouterState } from '@tanstack/react-router'
 import { Ikon } from './Ikon'
+import { Logomarke } from './Logomarke'
 import './Admin.css'
 
 // Menyval och knappar som ingår i designen men inte i uppgiften (avgränsningen i casebladet)
@@ -62,7 +63,7 @@ export function AdminLayout({ children }) {
       <aside className="adm-sidomeny" data-oppen={menyOppen} aria-label="Adminmeny">
         <div className="adm-sidomeny__topp">
           <div className="adm-logo">
-            <Link to="/admin" className="adm-logo__text">LJUSRUM</Link>
+            <Link to="/admin" className="adm-logo__text"><Logomarke size={26} />LJUSRUM</Link>
             <button type="button" className="icon-button adm-sidomeny__stang" onClick={() => setMenyOppen(false)}>
               <Ikon namn="stang" size={24} />
               <span className="visually-hidden">Stäng menyn</span>
@@ -80,7 +81,7 @@ export function AdminLayout({ children }) {
 
       <div className="adm-huvudyta">
         <header className="adm-topp">
-          <Link to="/admin" className="adm-topp__logo">LJUSRUM</Link>
+          <Link to="/admin" className="adm-topp__logo"><Logomarke size={26} />LJUSRUM</Link>
           <form role="search" className="search-field adm-topp__sok" onSubmit={sokAllt}>
             <Ikon namn="sok" />
             <label htmlFor="sok-allt" className="visually-hidden">Sök deltagare eller bokning</label>

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useRouterState } from '@tanstack/react-router'
 import { Ikon } from './Ikon'
+import { Logomarke } from './Logomarke'
 import './Webbplats.css'
 
 const villkor = [
@@ -46,7 +47,7 @@ export function Webbplats({ children, medPrisrad = false }) {
       <a className="skip-link" href="#innehall">Hoppa till innehållet</a>
       <header className="webb-huvud">
         <div className="webb-huvud__rad">
-          <Link to="/" className="logotyp">LJUSRUM</Link>
+          <Link to="/" className="logotyp"><Logomarke size={28} />LJUSRUM</Link>
           <button
             type="button"
             className="icon-button webb-huvud__knapp"
@@ -73,7 +74,7 @@ export function Webbplats({ children, medPrisrad = false }) {
         <div className="webb-fot__inre">
           <div className="webb-fot__kolumner">
             <div id="om-ljusrum" className="webb-fot__varumarke">
-              <Link to="/" className="webb-fot__logo">LJUSRUM</Link>
+              <Link to="/" className="webb-fot__logo"><Logomarke size={28} />LJUSRUM</Link>
               <p>Fotoworkshoppar för nybörjare i Stockholm. Lär dig ta kontroll över kameran, en lördag i taget.</p>
             </div>
 
@@ -109,7 +110,7 @@ export function Webbplats({ children, medPrisrad = false }) {
 
           <div className="webb-fot__botten">
             <p className="webb-fot__copy">
-              <span className="webb-fot__logo webb-fot__logo--liten" aria-hidden="true">LJUSRUM</span>
+              <span className="webb-fot__logo webb-fot__logo--liten" aria-hidden="true"><Logomarke size={22} />LJUSRUM</span>
               <span>© {new Date().getFullYear()} Ljusrum</span>
             </p>
             <div className="webb-fot__lankar">
