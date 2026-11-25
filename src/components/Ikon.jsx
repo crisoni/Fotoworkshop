@@ -2,6 +2,11 @@
 // Färgen följer texten runt ikonen (currentColor), storleken styrs med size.
 
 const ikoner = {
+  forbjuden: {
+    vb: '0 0 24 24',
+    streck: true,
+    d: ['M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z', 'M5.6 5.6l12.8 12.8'],
+  },
   varning: {
     vb: '0 0 24 24',
     streck: true,

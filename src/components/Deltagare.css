@@ -203,9 +203,15 @@
 .infor-dagen__lista li { display: flex; gap: var(--space-12); align-items: center; padding: var(--space-12) 0; border-bottom: 1px solid var(--border-default); }
 .infor-dagen__lista li:first-child { padding-top: 0; }
 .infor-dagen__lista svg { flex: none; color: #2e7d4f; }
-.infor-dagen__brickor { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-8); }
-.infor-dagen__brickor li {
-  display: inline-flex; align-items: center; height: 32px; padding: 0 var(--space-12);
-  border-radius: var(--radius-full); background: var(--porcelain); font-size: var(--text-caption); font-weight: 500;
-}
-.infor-dagen__brickor .infor-dagen__bricka--inte { background: none; border: 1px dashed var(--fog); color: var(--text-secondary); font-weight: 400; }
+/* Ingår / Ingår inte: etiketten i en egen kolumn, punkterna åtskilda med en mittpunkt.
+   Mittpunkten sitter efter varje punkt, så att en ny rad aldrig börjar med en punkt. */
+.infor-dagen__ingar { margin: 0; display: grid; gap: var(--space-8); }
+.infor-dagen__ingar > div { display: grid; grid-template-columns: 5.75rem minmax(0, 1fr); align-items: start; }
+.infor-dagen__ingar dt { font-weight: 500; line-height: 1.75; }
+.infor-dagen__ingar dd { margin: 0; }
+.infor-dagen__ingar ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; }
+.infor-dagen__ingar li { display: inline-flex; align-items: center; gap: var(--space-4); line-height: 1.75; }
+.infor-dagen__ingar li:not(:last-child)::after { content: '·'; color: var(--text-secondary); margin: 0 var(--space-12) 0 var(--space-8); }
+.infor-dagen__ingar svg { flex: none; }
+.infor-dagen__ja { color: #2e7d4f; }
+.infor-dagen__nej { color: var(--text-secondary); }
