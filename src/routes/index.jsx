@@ -15,7 +15,6 @@ export const Route = createFileRoute('/')({
 function Startsida() {
   const { alla, uppdatera } = useBokning()
   const navigate = useNavigate()
-  const totalt = String(tillfallen.length).padStart(2, '0')
 
   function valj(id) {
     uppdatera({ tillfalle: id })
@@ -49,14 +48,11 @@ function Startsida() {
         <div className="start-tillfallen">
           <h2 className="visually-hidden" id="start-tillfallen">Tillfällen</h2>
           <ul aria-labelledby="start-tillfallen">
-            {tillfallen.map((t, i) => {
+            {tillfallen.map((t) => {
               const kvar = platserKvar(alla, t.id)
               return (
                 <li key={t.id}>
                   <button type="button" className="start-kort" disabled={kvar === 0} onClick={() => valj(t.id)}>
-                    <span className="start-kort__nr" aria-hidden="true">
-                      {String(i + 1).padStart(2, '0')}<span>/{totalt}</span>
-                    </span>
                     <span className="start-kort__datum">{t.lang}</span>
                     <span className="start-kort__platser">{platserText(kvar)}</span>
                     <span className="visually-hidden">, välj och boka</span>
