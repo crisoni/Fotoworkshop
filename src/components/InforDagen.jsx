@@ -24,26 +24,15 @@ export function InforDagen({ rubrikId = 'infor-dagen', rubrikKlass }) {
         <p className="caption">{workshop.behovsInte}</p>
       </div>
 
-      <dl className="infor-dagen__ingar">
-        <div>
-          <dt>Ingår:</dt>
-          <dd>
-            <ul>
-              {workshop.ingarLista.map((sak) => (
-                <li key={sak}><Ikon namn="bock" size={16} className="infor-dagen__ja" />{sak}</li>
-              ))}
-            </ul>
-          </dd>
-        </div>
-        <div>
-          <dt>Ingår inte:</dt>
-          <dd>
-            <ul>
-              <li><Ikon namn="forbjuden" size={16} className="infor-dagen__nej" />{workshop.ingarInte}</li>
-            </ul>
-          </dd>
-        </div>
-      </dl>
+      <div className="infor-dagen__grupp">
+        <h3 className="label">Ingår</h3>
+        <ul className="infor-dagen__ingar">
+          {workshop.ingarLista.map(([sak, ikon]) => (
+            <li key={sak}><Ikon namn={ikon} size={22} />{sak}</li>
+          ))}
+          <li className="infor-dagen__ingar--inte"><Ikon namn="bestick" size={22} />Ingen {workshop.ingarInte.toLowerCase()}</li>
+        </ul>
+      </div>
     </section>
   )
 }

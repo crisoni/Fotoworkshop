@@ -2,6 +2,21 @@
 // Färgen följer texten runt ikonen (currentColor), storleken styrs med size.
 
 const ikoner = {
+  kopp: {
+    vb: '0 0 24 24',
+    streck: true,
+    d: ['M17 8h1a4 4 0 0 1 0 8h-1', 'M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z', 'M6 2v2', 'M10 2v2', 'M14 2v2'],
+  },
+  bestick: {
+    vb: '0 0 24 24',
+    streck: true,
+    d: ['M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2', 'M7 2v20', 'M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7'],
+  },
+  bok: {
+    vb: '0 0 24 24',
+    streck: true,
+    d: ['M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20'],
+  },
   forbjuden: {
     vb: '0 0 24 24',
     streck: true,

@@ -20,7 +20,8 @@ export const workshop = {
   kameraKrav: 'Du behöver en egen kamera där du kan ställa in bländare, slutartid och ISO. Mobilkamera räcker inte.',
   // Checklista och vad som ingår, i "Inför dagen"
   checklista: ['Laddat batteri', 'Minneskort', 'Kläder efter väder, vi är ute en del av dagen'],
-  ingarLista: ['Handledning', 'Övningsmaterial', 'Fika'],
+  // Vad som ingår, med ikon. Lunch ingår inte och visas i orange.
+  ingarLista: [['Handledning', 'mossa'], ['Övningsmaterial', 'bok'], ['Fika', 'kopp']],
   ingarInte: 'Lunch',
   behovsInte: 'Extra objektiv och stativ behövs inte.',
   ingar: 'Handledning, övningsmaterial och fika. Lunch ingår inte.',
