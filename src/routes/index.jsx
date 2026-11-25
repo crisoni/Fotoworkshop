@@ -68,7 +68,7 @@ function Startsida() {
         <div className="start-workshoppar__huvud">
           <div>
             <p className="label">Workshoppar</p>
-            <h2 id="workshoppar-rubrik">Välj din nästa fotodag</h2>
+            <h2 id="workshoppar-rubrik">Fotografera mer. Lär dig mer.</h2>
           </div>
           {/* Sidan med alla workshoppar finns inte än, länken är med som en del av designen */}
           <a href="#alla-workshoppar" className="text-link" onClick={(e) => e.preventDefault()}>
@@ -89,7 +89,7 @@ function Startsida() {
           {/* Påhittade kommande workshoppar, med i designen för att visa hur sidan kan växa */}
           {[
             ['Porträtt i naturligt ljus', '/bilder/portratt.jpg'],
-            ['Svartvitt på gatan', '/bilder/svartvitt.jpg'],
+            ['Gatufotografi', '/bilder/gatufoto.jpg'],
           ].map(([titel, bild]) => (
             <li key={titel}>
               <article className="ws-kort ws-kort--kommande">

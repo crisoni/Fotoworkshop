@@ -131,7 +131,6 @@
 .ws-kort__bricka--bokbar { background: var(--lavender-haze); color: var(--text-primary); }
 a.ws-kort:hover .ws-kort__titel { color: var(--text-link); }
 a.ws-kort:hover img { transform: scale(1.03); }
-.ws-kort--kommande img { filter: saturate(0.7); }
 /* Mobil: korten i en rad som sveps i sidled, nästa kort sticker fram i kanten */
 @media (max-width: 599px) {
   .start-workshoppar__lista {
